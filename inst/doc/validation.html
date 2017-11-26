@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Evgeni Chasnovski" />
+
+<meta name="date" content="2017-11-25" />
+
+<title>Validation</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Validation</h1>
+<h4 class="author"><em>Evgeni Chasnovski</em></h4>
+<h4 class="date"><em>2017-11-25</em></h4>
+
+
+
+<p>This vignette will describe the actual validation step (called ‘exposure’) of <code>ruler</code> workflow and show some examples of what one can do with validation results. Packs from vignette about rule packs will be used for this.</p>
+<div id="exposure" class="section level2">
+<h2>Exposure</h2>
+<div id="overview" class="section level3">
+<h3>Overview</h3>
+<p><strong>Exposing</strong> data to rules means applying rule packs to data, collecting results in common format and attaching them to the data as an <code>exposure</code> attribute. In this way actual exposure can be done in multiple steps and also be a part of a general data preparation pipeline.</p>
+<p>After attaching exposure to data frame one can extract information from it using the following functions:</p>
+<ul>
+<li><code>get_exposure()</code> for exposure.</li>
+<li><code>get_packs_info()</code> for packs info (part of exposure).</li>
+<li><code>get_report()</code> for tidy data validation report (part of exposure).</li>
+</ul>
+<p>For exposing data to rules use <code>expose()</code>:</p>
+<ul>
+<li>It takes data as a first argument and rule packs (in pure form or inside list at any depth) of interest after that.</li>
+<li>All rule packs are actually applied to <strong>keyed</strong> version of data (see <a href="https://echasnovski.github.io/keyholder">keyholder</a>) for reasons described in “Rule Packs” vignette. If input has keys they are removed and <em>id key</em> is created.</li>
+<li>It is guaranteed that its output is equivalent to the input data frame: only attribute <code>exposure</code> might change. If input has already <code>exposure</code> attached to it then the new one is binded with it.</li>
+</ul>
+<p>Simple example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">expose</span>(my_group_packs) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">get_exposure</span>()
+<span class="co">#&gt;   Exposure</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Packs info:</span>
+<span class="co">#&gt; # A tibble: 1 x 4</span>
+<span class="co">#&gt;            name       type              fun remove_obeyers</span>
+<span class="co">#&gt;           &lt;chr&gt;      &lt;chr&gt;           &lt;list&gt;          &lt;lgl&gt;</span>
+<span class="co">#&gt; 1 group_pack..1 group_pack &lt;S3: group_pack&gt;           TRUE</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Tidy data validation report:</span>
+<span class="co">#&gt; # A tibble: 2 x 5</span>
+<span class="co">#&gt;            pack      rule   var    id value</span>
+<span class="co">#&gt;           &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;lgl&gt;</span>
+<span class="co">#&gt; 1 group_pack..1 any_cyl_6   0.0     0 FALSE</span>
+<span class="co">#&gt; 2 group_pack..1 any_cyl_6   1.1     0 FALSE</span></code></pre></div>
+</div>
+<div id="dont-remove-obeyers" class="section level3">
+<h3>Don’t remove obeyers</h3>
+<p>By default exposing removes obeyers. One can leave obeyers by setting <code>.remove_obeyers</code> to <code>FALSE</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">expose</span>(my_group_packs, <span class="dt">.remove_obeyers =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">get_exposure</span>()
+<span class="co">#&gt;   Exposure</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Packs info:</span>
+<span class="co">#&gt; # A tibble: 1 x 4</span>
+<span class="co">#&gt;            name       type              fun remove_obeyers</span>
+<span class="co">#&gt;           &lt;chr&gt;      &lt;chr&gt;           &lt;list&gt;          &lt;lgl&gt;</span>
+<span class="co">#&gt; 1 group_pack..1 group_pack &lt;S3: group_pack&gt;          FALSE</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Tidy data validation report:</span>
+<span class="co">#&gt; # A tibble: 4 x 5</span>
+<span class="co">#&gt;            pack      rule   var    id value</span>
+<span class="co">#&gt;           &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;lgl&gt;</span>
+<span class="co">#&gt; 1 group_pack..1 any_cyl_6   0.0     0 FALSE</span>
+<span class="co">#&gt; 2 group_pack..1 any_cyl_6   0.1     0  TRUE</span>
+<span class="co">#&gt; 3 group_pack..1 any_cyl_6   1.0     0  TRUE</span>
+<span class="co">#&gt; 4 group_pack..1 any_cyl_6   1.1     0 FALSE</span></code></pre></div>
+</div>
+<div id="set-pack-name" class="section level3">
+<h3>Set pack name</h3>
+<p>Notice imputed group pack name <code>group_pack..1</code>. To change it one can set name during creation with <code>group_packs()</code> or write the following:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">expose</span>(<span class="dt">new_group_pack =</span> my_group_packs[[<span class="dv">1</span>]]) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">get_report</span>()
+<span class="co">#&gt; Tidy data validation report:</span>
+<span class="co">#&gt; # A tibble: 2 x 5</span>
+<span class="co">#&gt;             pack      rule   var    id value</span>
+<span class="co">#&gt;            &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;lgl&gt;</span>
+<span class="co">#&gt; 1 new_group_pack any_cyl_6   0.0     0 FALSE</span>
+<span class="co">#&gt; 2 new_group_pack any_cyl_6   1.1     0 FALSE</span></code></pre></div>
+</div>
+<div id="expose-step-by-step" class="section level3">
+<h3>Expose step by step</h3>
+<p>One can expose to several packs at ones or do it step by step:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars_one_step &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">expose</span>(my_data_packs, my_col_packs)
+
+mtcars_two_step &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">expose</span>(my_data_packs) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">expose</span>(my_col_packs)
+
+<span class="kw">identical</span>(mtcars_one_step, mtcars_two_step)
+<span class="co">#&gt; [1] TRUE</span></code></pre></div>
+</div>
+<div id="guessing" class="section level3">
+<h3>Guessing</h3>
+<p>By default <code>expose()</code> guesses which type of pack function represents (if it is not set manually). This is useful for interactive experiments. Guess is based on features of pack’s output structures (see <code>?expose</code> for more details).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">expose</span>(<span class="dt">some_data_pack =</span> . <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">nrow =</span> <span class="kw">nrow</span>(.) <span class="op">==</span><span class="st"> </span><span class="dv">10</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">get_exposure</span>()
+<span class="co">#&gt;   Exposure</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Packs info:</span>
+<span class="co">#&gt; # A tibble: 1 x 4</span>
+<span class="co">#&gt;             name      type             fun remove_obeyers</span>
+<span class="co">#&gt;            &lt;chr&gt;     &lt;chr&gt;          &lt;list&gt;          &lt;lgl&gt;</span>
+<span class="co">#&gt; 1 some_data_pack data_pack &lt;S3: data_pack&gt;           TRUE</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Tidy data validation report:</span>
+<span class="co">#&gt; # A tibble: 1 x 5</span>
+<span class="co">#&gt;             pack  rule   var    id value</span>
+<span class="co">#&gt;            &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;lgl&gt;</span>
+<span class="co">#&gt; 1 some_data_pack  nrow  .all     0 FALSE</span></code></pre></div>
+<p>However there are some edge cases (especially for group packs). To write strict and robust code one should use <code>.guess = FALSE</code> option.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">expose</span>(<span class="dt">some_data_pack =</span> . <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">nrow =</span> <span class="kw">nrow</span>(.) <span class="op">==</span><span class="st"> </span><span class="dv">10</span>),
+         <span class="dt">.guess =</span> <span class="ot">FALSE</span>)
+<span class="co">#&gt; Error in expose_single.default(X[[i]], ...): There is unsupported class of rule pack.</span></code></pre></div>
+</div>
+<div id="using-different-rule-separator" class="section level3">
+<h3>Using different rule separator</h3>
+<p>If for some reason not default rule separator was used in <code>rules()</code> one should take this into consideration by using argument <code>.rule_sep</code>. It takes regular expression describing the separator. <strong>Note</strong> that by default it is a string ’._.‘surrounded by any number of ’non alpha-numeric characters’ (with use of <code>inside_punct()</code>). This is done to take account of the <code>dplyr</code>’s default separator <code>_</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">regular_col_packs &lt;-<span class="st"> </span><span class="kw">col_packs</span>(
+  . <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise_all</span>(<span class="kw">rules</span>(<span class="kw">mean</span>(.) <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>))
+)
+
+irregular_col_packs &lt;-<span class="st"> </span><span class="kw">col_packs</span>(
+  . <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise_all</span>(<span class="kw">rules</span>(<span class="kw">mean</span>(.) <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">.prefix =</span> <span class="st">&quot;@_@&quot;</span>))
+)
+
+regular_report &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">expose</span>(regular_col_packs) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">get_report</span>()
+
+irregular_report &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">expose</span>(irregular_col_packs, <span class="dt">.rule_sep =</span> <span class="kw">inside_punct</span>(<span class="st">&quot;@_@&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">get_report</span>()
+
+<span class="kw">identical</span>(regular_report, irregular_report)
+<span class="co">#&gt; [1] TRUE</span>
+
+<span class="co"># Note suffix '_' after column names</span>
+mtcars <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">expose</span>(irregular_col_packs, <span class="dt">.rule_sep =</span> <span class="st">&quot;@_@&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">get_report</span>()
+<span class="co">#&gt; Tidy data validation report:</span>
+<span class="co">#&gt; # A tibble: 2 x 5</span>
+<span class="co">#&gt;          pack    rule   var    id value</span>
+<span class="co">#&gt;         &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;lgl&gt;</span>
+<span class="co">#&gt; 1 col_pack..1 rule..1   vs_     0 FALSE</span>
+<span class="co">#&gt; 2 col_pack..1 rule..1   am_     0 FALSE</span></code></pre></div>
+</div>
+</div>
+<div id="acting-after-exposure" class="section level2">
+<h2>Acting after exposure</h2>
+<div id="general-actions" class="section level3">
+<h3>General actions</h3>
+<p>With exposure attached to data one can perform different kinds of actions: exploration, assertion, imputation and so on.</p>
+<p>General actions are recommended to be done with <code>act_after_exposure()</code>. It takes two arguments:</p>
+<ul>
+<li><code>.trigger</code> - a function which takes the data with attached exposure and returns <code>TRUE</code> if some action should be made.</li>
+<li><code>.actor</code> - a function which takes the same argument as <code>.trigger</code> and performs some action.</li>
+</ul>
+<p>If trigger didn’t notify then the input data is returned untouched. Otherwise the output of <code>.actor()</code> is returned. <strong>Note</strong> that <code>act_after_exposure()</code> is often used for creating side effects (printing, throwing error etc.) and in that case should invisibly return its input (to be able to use it with pipe <code>%&gt;%</code>).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">trigger_one_pack &lt;-<span class="st"> </span><span class="cf">function</span>(.tbl) {
+  packs_number &lt;-<span class="st"> </span>.tbl <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">get_packs_info</span>() <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">nrow</span>()
+  
+  packs_number <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>
+}
+
+actor_one_pack &lt;-<span class="st"> </span><span class="cf">function</span>(.tbl) {
+  <span class="kw">cat</span>(<span class="st">&quot;More than one pack was applied.</span><span class="ch">\n</span><span class="st">&quot;</span>)
+  
+  <span class="kw">invisible</span>(.tbl)
+}
+
+mtcars <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">expose</span>(my_col_packs, my_row_packs) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">act_after_exposure</span>(
+    <span class="dt">.trigger =</span> trigger_one_pack,
+    <span class="dt">.actor =</span> actor_one_pack
+  ) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">invisible</span>()
+<span class="co">#&gt; More than one pack was applied.</span></code></pre></div>
+</div>
+<div id="assert-presence-of-rule-breaker" class="section level3">
+<h3>Assert presence of rule breaker</h3>
+<p><code>ruler</code> has function <code>assert_any_breaker()</code> which can notify about presence of any breaker in exposure.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">expose</span>(my_col_packs, my_row_packs) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">assert_any_breaker</span>()
+<span class="co">#&gt;   Breakers report</span>
+<span class="co">#&gt; # A tibble: 4 x 5</span>
+<span class="co">#&gt;            pack               rule   var    id value</span>
+<span class="co">#&gt;           &lt;chr&gt;              &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;lgl&gt;</span>
+<span class="co">#&gt; 1 my_col_pack_1           mean_low    vs     0 FALSE</span>
+<span class="co">#&gt; 2 my_col_pack_1           mean_low    am     0 FALSE</span>
+<span class="co">#&gt; 3   col_pack..2            rule..1    vs     0 FALSE</span>
+<span class="co">#&gt; 4 my_row_pack_1 is_common_row_mean  .all    15 FALSE</span>
+<span class="co">#&gt; Error: assert_any_breaker: Some breakers found in exposure.</span></code></pre></div>
+</div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
