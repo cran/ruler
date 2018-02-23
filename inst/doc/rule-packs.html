@@ -12,7 +12,7 @@
 
 <meta name="author" content="Evgeni Chasnovski" />
 
-<meta name="date" content="2018-01-05" />
+<meta name="date" content="2018-02-23" />
 
 <title>Rule Packs</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Rule Packs</h1>
 <h4 class="author"><em>Evgeni Chasnovski</em></h4>
-<h4 class="date"><em>2018-01-05</em></h4>
+<h4 class="date"><em>2018-02-23</em></h4>
 
 
 
@@ -222,13 +222,14 @@ mtcars <span class="op">%&gt;%</span>
   ) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">slice</span>(<span class="dv">20</span><span class="op">:</span><span class="dv">24</span>)
 <span class="co">#&gt; # A tibble: 5 x 6</span>
-<span class="co">#&gt;   cyl_is_common hp_is_common vs_is_common am_is_common gear_is_… carb_is_…</span>
-<span class="co">#&gt;   &lt;lgl&gt;         &lt;lgl&gt;        &lt;lgl&gt;        &lt;lgl&gt;        &lt;lgl&gt;     &lt;lgl&gt;    </span>
-<span class="co">#&gt; 1 F             F            F            F            T         F        </span>
-<span class="co">#&gt; 2 F             T            F            T            T         F        </span>
-<span class="co">#&gt; 3 F             T            T            T            T         T        </span>
-<span class="co">#&gt; 4 F             T            T            T            T         T        </span>
-<span class="co">#&gt; 5 F             F            T            T            T         T</span></code></pre></div>
+<span class="co">#&gt;   cyl_is_common hp_is_common vs_is_common am_is_common gear_is_common</span>
+<span class="co">#&gt;   &lt;lgl&gt;         &lt;lgl&gt;        &lt;lgl&gt;        &lt;lgl&gt;        &lt;lgl&gt;         </span>
+<span class="co">#&gt; 1 F             F            F            F            T             </span>
+<span class="co">#&gt; 2 F             T            F            T            T             </span>
+<span class="co">#&gt; 3 F             T            T            T            T             </span>
+<span class="co">#&gt; 4 F             T            T            T            T             </span>
+<span class="co">#&gt; 5 F             F            T            T            T             </span>
+<span class="co">#&gt; # ... with 1 more variable: carb_is_common &lt;lgl&gt;</span></code></pre></div>
 <p>The output has the following structure:</p>
 <ul>
 <li>Number of rows equals to <strong>number of rows for checked cells</strong>.</li>
