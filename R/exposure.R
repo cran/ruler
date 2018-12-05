@@ -201,7 +201,7 @@ new_single_exposure <- function(.pack, .remove_obeyers, .report) {
 new_pack_info <- function(.pack, .remove_obeyers) {
   pack_type <- class(.pack)[1]
 
-  tibble(type = pack_type,
+  tibble::tibble(type = pack_type,
          fun = list(.pack),
          remove_obeyers = .remove_obeyers) %>%
     add_class("pack_info")
@@ -213,7 +213,7 @@ new_packs_info <- function(.names, .packs, .remove_obeyers) {
   # pack name is stored in 'name' column.
   names(.packs) <- NULL
 
-  tibble(name = .names,
+  tibble::tibble(name = .names,
          type = packs_type,
          fun = .packs,
          remove_obeyers = .remove_obeyers) %>%
@@ -224,7 +224,7 @@ as_packs_info <- function(.x, .validate = TRUE) {
   if (.validate && !(is_packs_info(.x, .skip_class = TRUE))) {
     stop("as_packs_info: Invalid input.")
   } else {
-    add_class_cond(.x, "packs_info")
+    .x %>% remove_class_cond("pack_info") %>% add_class_cond("packs_info")
   }
 }
 

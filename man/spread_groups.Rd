@@ -20,8 +20,7 @@ A data frame in \link[=column-pack]{column pack} format.
 }
 \description{
 Function that is used during interpretation of \link[=group-pack]{group pack}
-output. It converts grouped \link[dplyr:summarise]{summary} into \link[=column-pack]{column
-pack} format.
+output. It converts grouped \link[dplyr:summarise]{summary} into \link[=column-pack]{column pack} format.
 }
 \details{
 Multiple grouping variables are converted to one with
@@ -32,7 +31,7 @@ as a whole.
 \examples{
 mtcars_grouped_summary <- mtcars \%>\%
   dplyr::group_by(vs, am) \%>\%
-  dplyr::summarise(n_low = n() > 6, n_high = n() < 10)
+  dplyr::summarise(n_low = dplyr::n() > 6, n_high = dplyr::n() < 10)
 
 spread_groups(mtcars_grouped_summary, vs, am)
 

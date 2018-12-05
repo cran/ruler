@@ -12,7 +12,7 @@
 
 <meta name="author" content="Evgeni Chasnovski" />
 
-<meta name="date" content="2018-05-20" />
+<meta name="date" content="2018-12-04" />
 
 <title>Rule Packs</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Rule Packs</h1>
 <h4 class="author"><em>Evgeni Chasnovski</em></h4>
-<h4 class="date"><em>2018-05-20</em></h4>
+<h4 class="date"><em>2018-12-04</em></h4>
 
 
 
@@ -118,7 +118,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(vs, am) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">summarise</span>(<span class="dt">any_cyl_6 =</span> <span class="kw">any</span>(cyl <span class="op">==</span><span class="st"> </span><span class="dv">6</span>))
 <span class="co">#&gt; # A tibble: 4 x 3</span>
-<span class="co">#&gt; # Groups:   vs [?]</span>
+<span class="co">#&gt; # Groups:   vs [2]</span>
 <span class="co">#&gt;      vs    am any_cyl_6</span>
 <span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;    </span>
 <span class="co">#&gt; 1     0     0 FALSE    </span>

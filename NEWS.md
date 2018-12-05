@@ -1,3 +1,7 @@
+# ruler 0.1.4
+
+* Reaction to `tibble` 2.0.0: ease some tests and adjust to new functionality.
+
 # ruler 0.1.3
 
 * Update for `dplyr` 0.7.5.
