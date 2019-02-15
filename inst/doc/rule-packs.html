@@ -12,14 +12,14 @@
 
 <meta name="author" content="Evgeni Chasnovski" />
 
-<meta name="date" content="2018-12-04" />
+<meta name="date" content="2019-02-15" />
 
 <title>Rule Packs</title>
 
 
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
+<style type="text/css" data-origin="pandoc">
 div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
@@ -55,7 +55,29 @@ code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
 code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
@@ -70,7 +92,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Rule Packs</h1>
 <h4 class="author"><em>Evgeni Chasnovski</em></h4>
-<h4 class="date"><em>2018-12-04</em></h4>
+<h4 class="date"><em>2019-02-15</em></h4>
 
 
 
@@ -152,6 +174,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 mtcars <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">summarise_if</span>(is_integerish, <span class="kw">funs</span>(<span class="dt">mean_low =</span> <span class="kw">mean</span>(.) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>))
+<span class="co">#&gt; Warning: funs() is soft deprecated as of dplyr 0.8.0</span>
+<span class="co">#&gt; please use list() instead</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; # Before:</span>
+<span class="co">#&gt; funs(name = f(.)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; # After: </span>
+<span class="co">#&gt; list(name = ~f(.))</span>
+<span class="co">#&gt; This warning is displayed once per session.</span>
 <span class="co">#&gt;   cyl_mean_low hp_mean_low vs_mean_low am_mean_low gear_mean_low</span>
 <span class="co">#&gt; 1         TRUE        TRUE       FALSE       FALSE          TRUE</span>
 <span class="co">#&gt;   carb_mean_low</span>
@@ -164,13 +195,13 @@ mtcars <span class="op">%&gt;%</span>
 </ul>
 <p>In general it is hard to automatically separate output’s column names into ‘validated column name’ and ‘rule name’ because default separator <code>_</code> is a commonly used one. For this reason <code>ruler</code> has function <code>rules()</code> which wraps <code>funs()</code> with the following functionality:</p>
 <ul>
-<li>Impute not supplied rule names. The format is ‘rule..{ind}’ where {ind} is the index of function position within <code>rules()</code>’s arguments.</li>
+<li>Impute not supplied rule names. The format is ’rule__{ind}’ where {ind} is the index of function position within <code>rules()</code>’s arguments.</li>
 <li>Add rarely used prefix <code>._.</code> (Morse code for ‘R’) to rule names. <strong>Note</strong> that one can change this prefix with <code>.prefix</code> argument.</li>
 </ul>
 <p>The next code creates a list with two elements:</p>
 <ul>
 <li>A column rule pack <code>my_col_pack_1</code> which checks obedience of ‘integerish’ columns to rule <code>mean_low</code>.</li>
-<li>A nameless column rule pack which checks obedience of column <code>vs</code> to some (will be imputed as <code>rule..1</code>) rule. <strong>Note</strong> the use of named argument in <code>vars(vs = &quot;vs&quot;)</code>. This is the current way in <code>dplyr</code>’s scoped variants of <code>summarise</code> and <code>mutate</code> to force using both column and function names in output’s column name.</li>
+<li>A nameless column rule pack which checks obedience of column <code>vs</code> to some (will be imputed as <code>rule__1</code>) rule. <strong>Note</strong> the use of named argument in <code>vars(vs = &quot;vs&quot;)</code>. This is the current way in <code>dplyr</code>’s scoped variants of <code>summarise</code> and <code>mutate</code> to force using both column and function names in output’s column name.</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_col_packs &lt;-<span class="st"> </span><span class="kw">col_packs</span>(
   <span class="dt">my_col_pack_1 =</span> . <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise_if</span>(

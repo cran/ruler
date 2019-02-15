@@ -12,14 +12,14 @@
 
 <meta name="author" content="Evgeni Chasnovski" />
 
-<meta name="date" content="2018-12-04" />
+<meta name="date" content="2019-02-15" />
 
 <title>Validation</title>
 
 
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
+<style type="text/css" data-origin="pandoc">
 div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
@@ -55,7 +55,29 @@ code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
 code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
@@ -70,7 +92,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Validation</h1>
 <h4 class="author"><em>Evgeni Chasnovski</em></h4>
-<h4 class="date"><em>2018-12-04</em></h4>
+<h4 class="date"><em>2019-02-15</em></h4>
 
 
 
@@ -102,14 +124,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="co">#&gt; # A tibble: 1 x 4</span>
 <span class="co">#&gt;   name          type       fun              remove_obeyers</span>
 <span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;      &lt;list&gt;           &lt;lgl&gt;         </span>
-<span class="co">#&gt; 1 group_pack..1 group_pack &lt;S3: group_pack&gt; TRUE          </span>
+<span class="co">#&gt; 1 group_pack__1 group_pack &lt;S3: group_pack&gt; TRUE          </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Tidy data validation report:</span>
 <span class="co">#&gt; # A tibble: 2 x 5</span>
 <span class="co">#&gt;   pack          rule      var      id value</span>
 <span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;     &lt;chr&gt; &lt;int&gt; &lt;lgl&gt;</span>
-<span class="co">#&gt; 1 group_pack..1 any_cyl_6 0.0       0 FALSE</span>
-<span class="co">#&gt; 2 group_pack..1 any_cyl_6 1.1       0 FALSE</span></code></pre></div>
+<span class="co">#&gt; 1 group_pack__1 any_cyl_6 0.0       0 FALSE</span>
+<span class="co">#&gt; 2 group_pack__1 any_cyl_6 1.1       0 FALSE</span></code></pre></div>
 </div>
 <div id="dont-remove-obeyers" class="section level3">
 <h3>Don’t remove obeyers</h3>
@@ -123,20 +145,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="co">#&gt; # A tibble: 1 x 4</span>
 <span class="co">#&gt;   name          type       fun              remove_obeyers</span>
 <span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;      &lt;list&gt;           &lt;lgl&gt;         </span>
-<span class="co">#&gt; 1 group_pack..1 group_pack &lt;S3: group_pack&gt; FALSE         </span>
+<span class="co">#&gt; 1 group_pack__1 group_pack &lt;S3: group_pack&gt; FALSE         </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Tidy data validation report:</span>
 <span class="co">#&gt; # A tibble: 4 x 5</span>
 <span class="co">#&gt;   pack          rule      var      id value</span>
 <span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;     &lt;chr&gt; &lt;int&gt; &lt;lgl&gt;</span>
-<span class="co">#&gt; 1 group_pack..1 any_cyl_6 0.0       0 FALSE</span>
-<span class="co">#&gt; 2 group_pack..1 any_cyl_6 0.1       0 TRUE </span>
-<span class="co">#&gt; 3 group_pack..1 any_cyl_6 1.0       0 TRUE </span>
-<span class="co">#&gt; 4 group_pack..1 any_cyl_6 1.1       0 FALSE</span></code></pre></div>
+<span class="co">#&gt; 1 group_pack__1 any_cyl_6 0.0       0 FALSE</span>
+<span class="co">#&gt; 2 group_pack__1 any_cyl_6 0.1       0 TRUE </span>
+<span class="co">#&gt; 3 group_pack__1 any_cyl_6 1.0       0 TRUE </span>
+<span class="co">#&gt; 4 group_pack__1 any_cyl_6 1.1       0 FALSE</span></code></pre></div>
 </div>
 <div id="set-pack-name" class="section level3">
 <h3>Set pack name</h3>
-<p>Notice imputed group pack name <code>group_pack..1</code>. To change it one can set name during creation with <code>group_packs()</code> or write the following:</p>
+<p>Notice imputed group pack name <code>group_pack__1</code>. To change it one can set name during creation with <code>group_packs()</code> or write the following:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">expose</span>(<span class="dt">new_group_pack =</span> my_group_packs[[<span class="dv">1</span>]]) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">get_report</span>()
@@ -193,7 +215,7 @@ mtcars_two_step &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</sp
 )
 
 irregular_col_packs &lt;-<span class="st"> </span><span class="kw">col_packs</span>(
-  . <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise_all</span>(<span class="kw">rules</span>(<span class="kw">mean</span>(.) <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">.prefix =</span> <span class="st">&quot;@_@&quot;</span>))
+  . <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise_all</span>(<span class="kw">rules</span>(<span class="kw">mean</span>(.) <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">.prefix =</span> <span class="st">&quot;a_a_&quot;</span>))
 )
 
 regular_report &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</span>
@@ -201,7 +223,7 @@ regular_report &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</spa
 <span class="st">  </span><span class="kw">get_report</span>()
 
 irregular_report &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">expose</span>(irregular_col_packs, <span class="dt">.rule_sep =</span> <span class="kw">inside_punct</span>(<span class="st">&quot;@_@&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">expose</span>(irregular_col_packs, <span class="dt">.rule_sep =</span> <span class="kw">inside_punct</span>(<span class="st">&quot;a_a_&quot;</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">get_report</span>()
 
 <span class="kw">identical</span>(regular_report, irregular_report)
@@ -209,14 +231,14 @@ irregular_report &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</s
 
 <span class="co"># Note suffix '_' after column names</span>
 mtcars <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">expose</span>(irregular_col_packs, <span class="dt">.rule_sep =</span> <span class="st">&quot;@_@&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">expose</span>(irregular_col_packs, <span class="dt">.rule_sep =</span> <span class="st">&quot;a_a_&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">get_report</span>()
 <span class="co">#&gt; Tidy data validation report:</span>
 <span class="co">#&gt; # A tibble: 2 x 5</span>
 <span class="co">#&gt;   pack        rule    var      id value</span>
 <span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt; &lt;int&gt; &lt;lgl&gt;</span>
-<span class="co">#&gt; 1 col_pack..1 rule..1 vs_       0 FALSE</span>
-<span class="co">#&gt; 2 col_pack..1 rule..1 am_       0 FALSE</span></code></pre></div>
+<span class="co">#&gt; 1 col_pack__1 rule__1 vs_       0 FALSE</span>
+<span class="co">#&gt; 2 col_pack__1 rule__1 am_       0 FALSE</span></code></pre></div>
 </div>
 </div>
 <div id="acting-after-exposure" class="section level2">
@@ -266,7 +288,7 @@ mtcars <span class="op">%&gt;%</span>
 <span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;              &lt;chr&gt; &lt;int&gt; &lt;lgl&gt;</span>
 <span class="co">#&gt; 1 my_col_pack_1 mean_low           vs        0 FALSE</span>
 <span class="co">#&gt; 2 my_col_pack_1 mean_low           am        0 FALSE</span>
-<span class="co">#&gt; 3 col_pack..2   rule..1            vs        0 FALSE</span>
+<span class="co">#&gt; 3 col_pack__2   rule__1            vs        0 FALSE</span>
 <span class="co">#&gt; 4 my_row_pack_1 is_common_row_mean .all     15 FALSE</span>
 <span class="co">#&gt; Error: assert_any_breaker: Some breakers found in exposure.</span></code></pre></div>
 </div>

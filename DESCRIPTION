@@ -1,6 +1,6 @@
 Package: ruler
 Title: Tidy Data Validation Reports
-Version: 0.1.4
+Version: 0.2.0
 Authors@R: person("Evgeni", "Chasnovski", email = "evgeni.chasnovski@gmail.com",
     role = c("aut", "cre"))
 Description: Tools for creating data validation pipelines and tidy reports. This
@@ -18,8 +18,8 @@ Imports: keyholder, dplyr (>= 0.7.0), rlang, tibble, tidyr (>= 0.7.0)
 Suggests: knitr, rmarkdown, testthat, covr
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2018-12-04 19:59:59 UTC; evgeni
+Packaged: 2019-02-15 20:42:46 UTC; evgeni
 Author: Evgeni Chasnovski [aut, cre]
 Maintainer: Evgeni Chasnovski <evgeni.chasnovski@gmail.com>
 Repository: CRAN
-Date/Publication: 2018-12-05 07:20:04 UTC
+Date/Publication: 2019-02-15 21:00:03 UTC
