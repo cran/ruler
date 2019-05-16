@@ -1,3 +1,7 @@
+# ruler 0.2.1
+
+* Update logic of `rules()`: it now only converts bare expressions with `.` as input into formulas.
+
 # ruler 0.2.0
 
 This version is reaction to changes in `dplyr` 0.8.0.
