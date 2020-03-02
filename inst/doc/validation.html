@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <meta name="author" content="Evgeni Chasnovski" />
 
-<meta name="date" content="2019-05-16" />
+<meta name="date" content="2020-03-02" />
 
 <title>Validation</title>
 
@@ -96,7 +96,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -117,9 +117,6 @@ padding-right: 2em;
 font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 font-size: 14px;
 line-height: 1.35;
-}
-#header {
-text-align: center;
 }
 #TOC {
 clear: both;
@@ -288,7 +285,8 @@ code > span.st { color: #d14; }
 code > span.co { color: #888888; font-style: italic; } 
 code > span.ot { color: #007020; } 
 code > span.al { color: #ff0000; font-weight: bold; } 
-code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
 </style>
 
 
@@ -303,7 +301,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 <h1 class="title toc-ignore">Validation</h1>
 <h4 class="author">Evgeni Chasnovski</h4>
-<h4 class="date">2019-05-16</h4>
+<h4 class="date">2020-03-02</h4>
 
 
 
@@ -333,9 +331,9 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb1-6" data-line-number="6"><span class="co">#&gt; Packs info:</span></a>
 <a class="sourceLine" id="cb1-7" data-line-number="7"><span class="co">#&gt; # A tibble: 1 x 4</span></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co">#&gt;   name          type       fun              remove_obeyers</span></a>
-<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;      &lt;list&gt;           &lt;lgl&gt;         </span></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">#&gt; 1 group_pack__1 group_pack &lt;S3: group_pack&gt; TRUE          </span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co">#&gt;   name          type       fun        remove_obeyers</span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;      &lt;list&gt;     &lt;lgl&gt;         </span></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">#&gt; 1 group_pack__1 group_pack &lt;grop_pck&gt; TRUE          </span></a>
 <a class="sourceLine" id="cb1-11" data-line-number="11"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb1-12" data-line-number="12"><span class="co">#&gt; Tidy data validation report:</span></a>
 <a class="sourceLine" id="cb1-13" data-line-number="13"><span class="co">#&gt; # A tibble: 2 x 5</span></a>
@@ -354,9 +352,9 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt; Packs info:</span></a>
 <a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">#&gt; # A tibble: 1 x 4</span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#&gt;   name          type       fun              remove_obeyers</span></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;      &lt;list&gt;           &lt;lgl&gt;         </span></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt; 1 group_pack__1 group_pack &lt;S3: group_pack&gt; FALSE         </span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#&gt;   name          type       fun        remove_obeyers</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;      &lt;list&gt;     &lt;lgl&gt;         </span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt; 1 group_pack__1 group_pack &lt;grop_pck&gt; FALSE         </span></a>
 <a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co">#&gt; Tidy data validation report:</span></a>
 <a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt; # A tibble: 4 x 5</span></a>
@@ -403,9 +401,9 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; Packs info:</span></a>
 <a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; # A tibble: 1 x 4</span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt;   name           type      fun             remove_obeyers</span></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt;   &lt;chr&gt;          &lt;chr&gt;     &lt;list&gt;          &lt;lgl&gt;         </span></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt; 1 some_data_pack data_pack &lt;S3: data_pack&gt; TRUE          </span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt;   name           type      fun        remove_obeyers</span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt;   &lt;chr&gt;          &lt;chr&gt;     &lt;list&gt;     &lt;lgl&gt;         </span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt; 1 some_data_pack data_pack &lt;data_pck&gt; TRUE          </span></a>
 <a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt; Tidy data validation report:</span></a>
 <a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt; # A tibble: 1 x 5</span></a>
@@ -505,6 +503,9 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 </div>
 </div>
 
+
+
+<!-- code folding -->
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

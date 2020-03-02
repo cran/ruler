@@ -1,4 +1,4 @@
-## ----setup, include = FALSE----------------------------------------------
+## ----setup, include = FALSE---------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -49,22 +49,22 @@ my_cell_packs <- cell_packs(
     slice(20:24)
 )
 
-## ----Simple expose-------------------------------------------------------
+## ----Simple expose------------------------------------------------------------
 mtcars %>%
   expose(my_group_packs) %>%
   get_exposure()
 
-## ----Expose can not remove obeyers---------------------------------------
+## ----Expose can not remove obeyers--------------------------------------------
 mtcars %>%
   expose(my_group_packs, .remove_obeyers = FALSE) %>%
   get_exposure()
 
-## ----Renaming pack-------------------------------------------------------
+## ----Renaming pack------------------------------------------------------------
 mtcars %>%
   expose(new_group_pack = my_group_packs[[1]]) %>%
   get_report()
 
-## ----Two-step expose-----------------------------------------------------
+## ----Two-step expose----------------------------------------------------------
 mtcars_one_step <- mtcars %>%
   expose(my_data_packs, my_col_packs)
 
@@ -74,12 +74,12 @@ mtcars_two_step <- mtcars %>%
 
 identical(mtcars_one_step, mtcars_two_step)
 
-## ----Expose can guess----------------------------------------------------
+## ----Expose can guess---------------------------------------------------------
 mtcars %>%
   expose(some_data_pack = . %>% summarise(nrow = nrow(.) == 10)) %>%
   get_exposure()
 
-## ----Expose can change rule separator------------------------------------
+## ----Expose can change rule separator-----------------------------------------
 regular_col_packs <- col_packs(
   . %>% summarise_all(rules(mean(.) > 1))
 )
@@ -103,7 +103,7 @@ mtcars %>%
   expose(irregular_col_packs, .rule_sep = "a_a_") %>%
   get_report()
 
-## ----Acting after exposure-----------------------------------------------
+## ----Acting after exposure----------------------------------------------------
 trigger_one_pack <- function(.tbl) {
   packs_number <- .tbl %>%
     get_packs_info() %>%

@@ -1,3 +1,7 @@
+# ruler 0.2.2
+
+* Reaction to `tibble` 3.0.0.
+
 # ruler 0.2.1
 
 * Update logic of `rules()`: it now only converts bare expressions with `.` as input into formulas.

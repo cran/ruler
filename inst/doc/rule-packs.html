@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <meta name="author" content="Evgeni Chasnovski" />
 
-<meta name="date" content="2019-05-16" />
+<meta name="date" content="2020-03-02" />
 
 <title>Rule Packs</title>
 
@@ -96,7 +96,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -117,9 +117,6 @@ padding-right: 2em;
 font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 font-size: 14px;
 line-height: 1.35;
-}
-#header {
-text-align: center;
 }
 #TOC {
 clear: both;
@@ -288,7 +285,8 @@ code > span.st { color: #d14; }
 code > span.co { color: #888888; font-style: italic; } 
 code > span.ot { color: #007020; } 
 code > span.al { color: #ff0000; font-weight: bold; } 
-code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
 </style>
 
 
@@ -303,7 +301,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 <h1 class="title toc-ignore">Rule Packs</h1>
 <h4 class="author">Evgeni Chasnovski</h4>
-<h4 class="date">2019-05-16</h4>
+<h4 class="date">2020-03-02</h4>
 
 
 
@@ -386,18 +384,19 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb5-3" data-line-number="3">mtcars <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb5-4" data-line-number="4"><span class="st">  </span><span class="kw">summarise_if</span>(is_integerish, <span class="kw">funs</span>(<span class="dt">mean_low =</span> <span class="kw">mean</span>(.) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>))</a>
 <a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; Warning: funs() is soft deprecated as of dplyr 0.8.0</span></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; please use list() instead</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; Please use a list of either functions or lambdas: </span></a>
 <a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt;   # Before:</span></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt;   funs(name = f(.))</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt;   # Simple named list: </span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt;   list(mean = mean, median = median)</span></a>
 <a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt;   # After: </span></a>
-<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt;   list(name = ~ f(.))</span></a>
-<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt; This warning is displayed once per session.</span></a>
-<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt;   cyl_mean_low hp_mean_low vs_mean_low am_mean_low gear_mean_low</span></a>
-<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; 1         TRUE        TRUE       FALSE       FALSE          TRUE</span></a>
-<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#&gt;   carb_mean_low</span></a>
-<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co">#&gt; 1          TRUE</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt;   # Auto named with `tibble::lst()`: </span></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt;   tibble::lst(mean, median)</span></a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt;   # Using lambdas</span></a>
+<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt;   list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))</span></a>
+<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#&gt; This warning is displayed once per session.</span></a>
+<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co">#&gt;   cyl_mean_low hp_mean_low vs_mean_low am_mean_low gear_mean_low carb_mean_low</span></a>
+<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co">#&gt; 1         TRUE        TRUE       FALSE       FALSE          TRUE          TRUE</span></a></code></pre></div>
 <p>The output has the following structure:</p>
 <ul>
 <li>Number of rows equals to <strong>one</strong>.</li>
@@ -494,6 +493,9 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb10-7" data-line-number="7">)</a></code></pre></div>
 </div>
 
+
+
+<!-- code folding -->
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
