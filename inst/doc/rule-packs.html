@@ -12,7 +12,7 @@
 
 <meta name="author" content="Evgeni Chasnovski" />
 
-<meta name="date" content="2020-03-02" />
+<meta name="date" content="2020-05-09" />
 
 <title>Rule Packs</title>
 
@@ -301,7 +301,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">Rule Packs</h1>
 <h4 class="author">Evgeni Chasnovski</h4>
-<h4 class="date">2020-03-02</h4>
+<h4 class="date">2020-05-09</h4>
 
 
 
@@ -348,14 +348,15 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <p>To check whether certain groups of rows of <code>mtcars</code> obey some rules one can write the next dplyr pipeline:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">mtcars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(vs, am) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="st">    </span><span class="kw">summarise</span>(<span class="dt">any_cyl_6 =</span> <span class="kw">any</span>(cyl <span class="op">==</span><span class="st"> </span><span class="dv">6</span>))</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; # Groups:   vs [2]</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt;      vs    am any_cyl_6</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;    </span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt; 1     0     0 FALSE    </span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt; 2     0     1 TRUE     </span></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt; 3     1     0 TRUE     </span></a>
-<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt; 4     1     1 FALSE</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; `summarise()` regrouping by 'vs' (override with `.groups` argument)</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; # A tibble: 4 x 3</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; # Groups:   vs [2]</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt;      vs    am any_cyl_6</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;    </span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt; 1     0     0 FALSE    </span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt; 2     0     1 TRUE     </span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt; 3     1     0 TRUE     </span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt; 4     1     1 FALSE</span></a></code></pre></div>
 <p>The output has the following structure:</p>
 <ul>
 <li>Some columns define group levels (<code>vs</code> and <code>am</code> in this case).</li>
@@ -383,7 +384,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <a class="sourceLine" id="cb5-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb5-3" data-line-number="3">mtcars <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb5-4" data-line-number="4"><span class="st">  </span><span class="kw">summarise_if</span>(is_integerish, <span class="kw">funs</span>(<span class="dt">mean_low =</span> <span class="kw">mean</span>(.) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.5</span>))</a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; Warning: funs() is soft deprecated as of dplyr 0.8.0</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; Warning: `funs()` is deprecated as of dplyr 0.8.0.</span></a>
 <a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; Please use a list of either functions or lambdas: </span></a>
 <a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt;   # Simple named list: </span></a>
@@ -394,9 +395,10 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt;   # Using lambdas</span></a>
 <a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt;   list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))</span></a>
-<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#&gt; This warning is displayed once per session.</span></a>
-<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co">#&gt;   cyl_mean_low hp_mean_low vs_mean_low am_mean_low gear_mean_low carb_mean_low</span></a>
-<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co">#&gt; 1         TRUE        TRUE       FALSE       FALSE          TRUE          TRUE</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#&gt; This warning is displayed once every 8 hours.</span></a>
+<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co">#&gt; Call `lifecycle::last_warnings()` to see where this warning was generated.</span></a>
+<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co">#&gt;   cyl_mean_low hp_mean_low vs_mean_low am_mean_low gear_mean_low carb_mean_low</span></a>
+<a class="sourceLine" id="cb5-19" data-line-number="19"><span class="co">#&gt; 1         TRUE        TRUE       FALSE       FALSE          TRUE          TRUE</span></a></code></pre></div>
 <p>The output has the following structure:</p>
 <ul>
 <li>Number of rows equals to <strong>one</strong>.</li>
@@ -430,13 +432,13 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <a class="sourceLine" id="cb7-4" data-line-number="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rowMean =</span> <span class="kw">rowMeans</span>(.)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb7-5" data-line-number="5"><span class="st">  </span><span class="kw">transmute</span>(<span class="dt">is_common_row_mean =</span> <span class="kw">abs</span>(<span class="kw">z_score</span>(rowMean)) <span class="op">&lt;</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb7-6" data-line-number="6"><span class="st">  </span><span class="kw">slice</span>(<span class="dv">10</span><span class="op">:</span><span class="dv">15</span>)</a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt;   is_common_row_mean</span></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; 1               TRUE</span></a>
-<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; 2               TRUE</span></a>
-<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; 3               TRUE</span></a>
-<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; 4               TRUE</span></a>
-<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt; 5               TRUE</span></a>
-<a class="sourceLine" id="cb7-13" data-line-number="13"><span class="co">#&gt; 6              FALSE</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt;                    is_common_row_mean</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; Merc 280                         TRUE</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; Merc 280C                        TRUE</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; Merc 450SE                       TRUE</span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; Merc 450SL                       TRUE</span></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt; Merc 450SLC                      TRUE</span></a>
+<a class="sourceLine" id="cb7-13" data-line-number="13"><span class="co">#&gt; Cadillac Fleetwood              FALSE</span></a></code></pre></div>
 <p>The output has the following structure:</p>
 <ul>
 <li>Number of rows equals to <strong>number of checked rows</strong>.</li>
@@ -460,18 +462,18 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <a class="sourceLine" id="cb9-3" data-line-number="3">    <span class="kw">funs</span>(<span class="dt">is_common =</span> <span class="kw">abs</span>(<span class="kw">z_score</span>(.)) <span class="op">&lt;</span><span class="st"> </span><span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb9-4" data-line-number="4">  ) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb9-5" data-line-number="5"><span class="st">    </span><span class="kw">slice</span>(<span class="dv">20</span><span class="op">:</span><span class="dv">24</span>)</a>
-<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt;   cyl_is_common hp_is_common vs_is_common am_is_common gear_is_common</span></a>
-<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt; 1         FALSE        FALSE        FALSE        FALSE           TRUE</span></a>
-<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt; 2         FALSE         TRUE        FALSE         TRUE           TRUE</span></a>
-<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt; 3         FALSE         TRUE         TRUE         TRUE           TRUE</span></a>
-<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="co">#&gt; 4         FALSE         TRUE         TRUE         TRUE           TRUE</span></a>
-<a class="sourceLine" id="cb9-11" data-line-number="11"><span class="co">#&gt; 5         FALSE        FALSE         TRUE         TRUE           TRUE</span></a>
-<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt;   carb_is_common</span></a>
-<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt; 1          FALSE</span></a>
-<a class="sourceLine" id="cb9-14" data-line-number="14"><span class="co">#&gt; 2          FALSE</span></a>
-<a class="sourceLine" id="cb9-15" data-line-number="15"><span class="co">#&gt; 3           TRUE</span></a>
-<a class="sourceLine" id="cb9-16" data-line-number="16"><span class="co">#&gt; 4           TRUE</span></a>
-<a class="sourceLine" id="cb9-17" data-line-number="17"><span class="co">#&gt; 5           TRUE</span></a></code></pre></div>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt;                  cyl_is_common hp_is_common vs_is_common am_is_common</span></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt; Toyota Corolla           FALSE        FALSE        FALSE        FALSE</span></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt; Toyota Corona            FALSE         TRUE        FALSE         TRUE</span></a>
+<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt; Dodge Challenger         FALSE         TRUE         TRUE         TRUE</span></a>
+<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="co">#&gt; AMC Javelin              FALSE         TRUE         TRUE         TRUE</span></a>
+<a class="sourceLine" id="cb9-11" data-line-number="11"><span class="co">#&gt; Camaro Z28               FALSE        FALSE         TRUE         TRUE</span></a>
+<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt;                  gear_is_common carb_is_common</span></a>
+<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt; Toyota Corolla             TRUE          FALSE</span></a>
+<a class="sourceLine" id="cb9-14" data-line-number="14"><span class="co">#&gt; Toyota Corona              TRUE          FALSE</span></a>
+<a class="sourceLine" id="cb9-15" data-line-number="15"><span class="co">#&gt; Dodge Challenger           TRUE           TRUE</span></a>
+<a class="sourceLine" id="cb9-16" data-line-number="16"><span class="co">#&gt; AMC Javelin                TRUE           TRUE</span></a>
+<a class="sourceLine" id="cb9-17" data-line-number="17"><span class="co">#&gt; Camaro Z28                 TRUE           TRUE</span></a></code></pre></div>
 <p>The output has the following structure:</p>
 <ul>
 <li>Number of rows equals to <strong>number of rows for checked cells</strong>.</li>
