@@ -23,7 +23,9 @@ my_group_packs <- group_packs(
   .group_vars = c("vs", "am")
 )
 
-is_integerish <- function(x) {all(x == as.integer(x))}
+is_integerish <- function(x) {
+  all(x == as.integer(x))
+}
 
 my_col_packs <- col_packs(
   my_col_pack_1 = . %>% summarise_if(
@@ -33,7 +35,9 @@ my_col_packs <- col_packs(
   . %>% summarise_at(vars(vs = "vs"), rules(sum(.) > 300))
 )
 
-z_score <- function(x) {(x - mean(x)) / sd(x)}
+z_score <- function(x) {
+  (x - mean(x)) / sd(x)
+}
 
 my_row_packs <- row_packs(
   my_row_pack_1 = . %>% mutate(rowMean = rowMeans(.)) %>%
@@ -108,13 +112,13 @@ trigger_one_pack <- function(.tbl) {
   packs_number <- .tbl %>%
     get_packs_info() %>%
     nrow()
-  
+
   packs_number > 1
 }
 
 actor_one_pack <- function(.tbl) {
   cat("More than one pack was applied.\n")
-  
+
   invisible(.tbl)
 }
 

@@ -7,7 +7,7 @@
 \title{ruler: Rule Your Data}
 \description{
 \code{ruler} offers a set of tools for creating tidy data validation reports using
-\href{http://dplyr.tidyverse.org}{dplyr} grammar of data manipulation. It
+\href{https://dplyr.tidyverse.org}{dplyr} grammar of data manipulation. It
 is designed to be flexible and extendable in terms of creating rules and
 using their output.
 }
@@ -41,6 +41,6 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Evgeni Chasnovski \email{evgeni.chasnovski@gmail.com}
+\strong{Maintainer}: Evgeni Chasnovski \email{evgeni.chasnovski@gmail.com} (\href{https://orcid.org/0000-0002-1617-4019}{ORCID})
 
 }

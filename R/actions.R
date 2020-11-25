@@ -19,7 +19,7 @@
 #' It is a good idea that `.actor` should be doing one of two things:
 #' - Making side effects. For example throwing an error (if condition in
 #' `.trigger` is met), printing some information and so on. In this case it
-#' should return `.tbl` to be used properly inside a [pipe][magrittr::pipe].
+#' should return `.tbl` to be used properly inside a \link[magrittr:pipe]{pipe}.
 #' - Changing `.tbl` based on exposure information. In this case it should
 #' return the imputed version of `.tbl`.
 #'
@@ -30,11 +30,13 @@
 #' validation pipelines.
 #'
 #' @examples
-#' exposure_printer <- function(.tbl) {print(get_exposure(.tbl)); .tbl}
+#' exposure_printer <- function(.tbl) {
+#'   print(get_exposure(.tbl))
+#'   .tbl
+#' }
 #' mtcars_exposed <- mtcars %>%
 #'   expose(data_packs(. %>% dplyr::summarise(nrow_low = nrow(.) > 50))) %>%
 #'   act_after_exposure(any_breaker, exposure_printer)
-#'
 #' @export
 act_after_exposure <- function(.tbl, .trigger, .actor) {
   tbl_exposure <- get_exposure(.tbl)
@@ -44,8 +46,10 @@ act_after_exposure <- function(.tbl, .trigger, .actor) {
   }
 
   if (!is_exposure(tbl_exposure)) {
-    stop("act_after_exposure: Extracted 'exposure' object is not a ",
-         "proper exposure.")
+    stop(
+      "act_after_exposure: Extracted 'exposure' object is not a ",
+      "proper exposure."
+    )
   }
 
   if (isTRUE(.trigger(.tbl))) {
@@ -74,7 +78,7 @@ act_after_exposure <- function(.tbl, .trigger, .actor) {
 #' - In case `.silent` is `FALSE` print rows from exposure
 #' [report][ruler-report] corresponding to rule breakers.
 #' - Make assertion of the chosen `.type` about breaker presence in exposure.
-#' - Return `.tbl` (for using inside a [pipe][magrittr::pipe]).
+#' - Return `.tbl` (for using inside a \link[magrittr:pipe]{pipe}).
 #'
 #' If there are no breakers only `.tbl` is returned.
 #'
@@ -84,17 +88,21 @@ act_after_exposure <- function(.tbl, .trigger, .actor) {
 #'
 #' @examples
 #' \dontrun{
-#'   mtcars %>%
-#'     expose(data_packs(. %>% dplyr::summarise(nrow_low = nrow(.) > 50))) %>%
-#'     assert_any_breaker()
+#' mtcars %>%
+#'   expose(data_packs(. %>% dplyr::summarise(nrow_low = nrow(.) > 50))) %>%
+#'   assert_any_breaker()
 #' }
 #' @export
 assert_any_breaker <- function(.tbl, .type = "error", .silent = FALSE, ...) {
   informer_fun <- switch(
     .type,
     message = message,
-    warning = function(.msg) {warning(.msg, call. = FALSE)},
-    function(.msg) {stop(.msg, call. = FALSE)}
+    warning = function(.msg) {
+      warning(.msg, call. = FALSE)
+    },
+    function(.msg) {
+      stop(.msg, call. = FALSE)
+    }
   )
   breakers_informer <- generate_breakers_informer(
     informer_fun,
@@ -122,7 +130,6 @@ assert_any_breaker <- function(.tbl, .type = "error", .silent = FALSE, ...) {
 #' mtcars %>%
 #'   expose(data_packs(. %>% dplyr::summarise(nrow_low = nrow(.) > 50))) %>%
 #'   any_breaker()
-#'
 #' @export
 any_breaker <- function(.tbl) {
   input_exposure <- get_exposure(.tbl)

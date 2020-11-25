@@ -26,7 +26,7 @@ my_data_packs <- data_packs(
 
 ## ----Group properties of mtcars-----------------------------------------------
 mtcars %>% group_by(vs, am) %>%
-    summarise(any_cyl_6 = any(cyl == 6))
+  summarise(any_cyl_6 = any(cyl == 6))
 
 ## ----Group rule packs---------------------------------------------------------
 my_group_packs <- group_packs(
@@ -36,7 +36,9 @@ my_group_packs <- group_packs(
 )
 
 ## ----Column properties of mtcars----------------------------------------------
-is_integerish <- function(x) {all(x == as.integer(x))}
+is_integerish <- function(x) {
+  all(x == as.integer(x))
+}
 
 mtcars %>%
   summarise_if(is_integerish, funs(mean_low = mean(.) > 0.5))
@@ -51,7 +53,9 @@ my_col_packs <- col_packs(
 )
 
 ## ----Row properties of mtcars-------------------------------------------------
-z_score <- function(x) {(x - mean(x)) / sd(x)}
+z_score <- function(x) {
+  (x - mean(x)) / sd(x)
+}
 
 mtcars %>%
   mutate(rowMean = rowMeans(.)) %>%
@@ -67,10 +71,10 @@ my_row_packs <- row_packs(
 
 ## ----Cell properties of mtcars------------------------------------------------
 mtcars %>% transmute_if(
-    is_integerish,
-    funs(is_common = abs(z_score(.)) < 1)
-  ) %>%
-    slice(20:24)
+  is_integerish,
+  funs(is_common = abs(z_score(.)) < 1)
+) %>%
+  slice(20:24)
 
 ## ----Cell rule packs----------------------------------------------------------
 my_cell_packs <- cell_packs(

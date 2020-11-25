@@ -1,3 +1,7 @@
+# ruler 0.2.4
+
+* Maintenance release in reaction to a planned update of `tibble`.
+
 # ruler 0.2.3
 
 * Reaction to `dplyr` 1.0.0.

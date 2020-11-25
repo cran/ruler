@@ -1,235 +1,185 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<meta charset="utf-8" />
-<meta name="generator" content="pandoc" />
-<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+<title>Design process</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-
-<meta name="author" content="Evgeni Chasnovski" />
-
-<meta name="date" content="2020-05-09" />
-
-<title>Design Process and Exposure Format</title>
-
-
-
-
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
 
 
-<style type="text/css">body {
-background-color: #fff;
-margin: 1em auto;
-max-width: 700px;
-overflow: visible;
-padding-left: 2em;
-padding-right: 2em;
-font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-font-size: 14px;
-line-height: 1.35;
+
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
 }
-#TOC {
-clear: both;
-margin: 0 0 10px 10px;
-padding: 4px;
-width: 400px;
-border: 1px solid #CCCCCC;
-border-radius: 5px;
-background-color: #f6f6f6;
-font-size: 13px;
-line-height: 1.3;
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
 }
-#TOC .toctitle {
-font-weight: bold;
-font-size: 15px;
-margin-left: 5px;
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
 }
-#TOC ul {
-padding-left: 40px;
-margin-left: -1.5em;
-margin-top: 5px;
-margin-bottom: 5px;
+
+h1 {
+   font-size:2.2em;
 }
-#TOC ul ul {
-margin-left: -2em;
+
+h2 {
+   font-size:1.8em;
 }
-#TOC li {
-line-height: 16px;
+
+h3 {
+   font-size:1.4em;
 }
-table {
-margin: 1em auto;
-border-width: 1px;
-border-color: #DDDDDD;
-border-style: outset;
-border-collapse: collapse;
+
+h4 {
+   font-size:1.0em;
 }
-table th {
-border-width: 2px;
-padding: 5px;
-border-style: inset;
+
+h5 {
+   font-size:0.9em;
 }
-table td {
-border-width: 1px;
-border-style: inset;
-line-height: 18px;
-padding: 5px 5px;
+
+h6 {
+   font-size:0.8em;
 }
-table, table th, table td {
-border-left-style: none;
-border-right-style: none;
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
 }
-table thead, table tr.even {
-background-color: #f7f7f7;
-}
-p {
-margin: 0.5em 0;
-}
-blockquote {
-background-color: #f6f6f6;
-padding: 0.25em 0.75em;
-}
-hr {
-border-style: solid;
-border: none;
-border-top: 1px solid #777;
-margin: 28px 0;
-}
-dl {
-margin-left: 0;
-}
-dl dd {
-margin-bottom: 13px;
-margin-left: 13px;
-}
-dl dt {
-font-weight: bold;
-}
-ul {
-margin-top: 0;
-}
-ul li {
-list-style: circle outside;
-}
-ul ul {
-margin-bottom: 0;
-}
-pre, code {
-background-color: #f7f7f7;
-border-radius: 3px;
-color: #333;
-white-space: pre-wrap; 
+
+pre, img {
+  max-width: 100%;
 }
 pre {
-border-radius: 3px;
-margin: 5px 0px 10px 0px;
-padding: 10px;
+  overflow-x: auto;
 }
-pre:not([class]) {
-background-color: #f7f7f7;
+pre code {
+   display: block; padding: 0.5em;
 }
+
 code {
-font-family: Consolas, Monaco, 'Courier New', monospace;
-font-size: 85%;
+  font-size: 92%;
+  border: 1px solid #ccc;
 }
-p > code, li > code {
-padding: 2px 0px;
-}
-div.figure {
-text-align: center;
-}
-img {
-background-color: #FFFFFF;
-padding: 2px;
-border: 1px solid #DDDDDD;
-border-radius: 3px;
-border: 1px solid #CCCCCC;
-margin: 0 5px;
-}
-h1 {
-margin-top: 0;
-font-size: 35px;
-line-height: 40px;
-}
-h2 {
-border-bottom: 4px solid #f7f7f7;
-padding-top: 10px;
-padding-bottom: 2px;
-font-size: 145%;
-}
-h3 {
-border-bottom: 2px solid #f7f7f7;
-padding-top: 10px;
-font-size: 120%;
-}
-h4 {
-border-bottom: 1px solid #f7f7f7;
-margin-left: 8px;
-font-size: 105%;
-}
-h5, h6 {
-border-bottom: 1px solid #ccc;
-font-size: 105%;
-}
-a {
-color: #0033dd;
-text-decoration: none;
-}
-a:hover {
-color: #6666ff; }
-a:visited {
-color: #800080; }
-a:visited:hover {
-color: #BB00BB; }
-a[href^="http:"] {
-text-decoration: underline; }
-a[href^="https:"] {
-text-decoration: underline; }
 
-code > span.kw { color: #555; font-weight: bold; } 
-code > span.dt { color: #902000; } 
-code > span.dv { color: #40a070; } 
-code > span.bn { color: #d14; } 
-code > span.fl { color: #d14; } 
-code > span.ch { color: #d14; } 
-code > span.st { color: #d14; } 
-code > span.co { color: #888888; font-style: italic; } 
-code > span.ot { color: #007020; } 
-code > span.al { color: #ff0000; font-weight: bold; } 
-code > span.fu { color: #900; font-weight: bold; } 
-code > span.er { color: #a61717; background-color: #e3d2d2; } 
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
 </style>
-
 
 
 
 </head>
 
 <body>
+<p>The main idea of the <code>ruler</code> package is to create a format of validation results (along with functional API) that will work naturally with <a href="https://www.tidyverse.org/">tidyverse</a> tools. This vignette will:</p>
 
-
-
-
-<h1 class="title toc-ignore">Design Process and Exposure Format</h1>
-<h4 class="author">Evgeni Chasnovski</h4>
-<h4 class="date">2020-05-09</h4>
-
-
-
-<p>The main idea of the <code>ruler</code> package is to create a format of validation results (along with functional API) that will work naturally with <a href="http://tidyverse.org">tidyverse</a> tools. This vignette will:</p>
 <ul>
-<li>Guide you through the design process of <strong>exposure</strong>: <code>ruler</code>’s validation result format. This should help to understand the foundations of <code>ruler</code> validation workflow.</li>
+<li>Guide you through the design process of <strong>exposure</strong>: <code>ruler</code>&#39;s validation result format. This should help to understand the foundations of <code>ruler</code> validation workflow.</li>
 <li>Describe exposure format.</li>
 </ul>
-<div id="design-process" class="section level2">
+
 <h2>Design process</h2>
-<p>The preferred local data structure in <code>tidyverse</code> is <a href="http://tibble.tidyverse.org">tibble</a>: “A modern re-imagining of the data frame”, on which its implementation is based. That is why <code>ruler</code> uses data frames as preferred format for data to be validated. However the initial goal is to use tibbles in creation of validation result format as much as possible.</p>
+
+<p>The preferred local data structure in <code>tidyverse</code> is <a href="https://tibble.tidyverse.org">tibble</a>: &ldquo;A modern re-imagining of the data frame&rdquo;, on which its implementation is based. That is why <code>ruler</code> uses data frames as preferred format for data to be validated. However the initial goal is to use tibbles in creation of validation result format as much as possible.</p>
+
 <p>Basically data frame is a list of variables with the same length. It is easier to think about it as two-dimensional structure where columns can be of different types.</p>
+
 <p>In abstract form validation of data frame can be put as <strong><em>asking whether certain subset of data frame (data unit) obeys certain rule</em></strong>. The result of validation is logical <strong>value</strong> representing an answer.</p>
-<p>With influence of <a href="http://dplyr.tidyverse.org">dplyr</a>’s grammar of data manipulation a data frame can be represented in terms of the following data units:</p>
+
+<p>With influence of <a href="https://dplyr.tidyverse.org">dplyr</a>&#39;s grammar of data manipulation a data frame can be represented in terms of the following data units:</p>
+
 <ul>
 <li>Data frame as a whole. Validation can be done by <code>summarise()</code> <em>without</em> grouping.</li>
 <li>Collection of groups of rows. Validation can be done by <code>summarise()</code> <em>with</em> grouping.</li>
@@ -237,35 +187,45 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <li>Collection of rows. Validation can be done by <code>transmute()</code>.</li>
 <li>2d-collection of cells. Validation can be done by scoped variants of <code>transmute()</code>: <code>transmute_all()</code>, <code>transmute_if()</code> and <code>transmute_at()</code>.</li>
 </ul>
+
 <p>In <code>ruler</code> data, group, column, row and cell are five basic data units. They all can be described by the combination of two variables:</p>
+
 <ul>
 <li><strong>var</strong> which represents the variable name of data unit:
+
 <ul>
-<li>Value ‘.all’ is reserved for ‘all columns as a whole’.</li>
+<li>Value &#39;.all&#39; is reserved for &#39;all columns as a whole&#39;.</li>
 <li>Value <em>equal</em> to some column name indicates column of data unit.</li>
 <li>Value <em>not equal</em> to some column name indicates the name of group: it is created by uniting (with delimiter) group levels of grouping columns.</li>
 </ul></li>
 <li><strong>id</strong> which represents the row index of data unit:
+
 <ul>
-<li>Value 0 is reserved for ‘all rows as a whole’.</li>
+<li>Value 0 is reserved for &#39;all rows as a whole&#39;.</li>
 <li>Value not equal to 0 indicates the row index of data unit.</li>
 </ul></li>
 </ul>
+
 <p>Validation of data units can be done with the <code>dplyr</code> functions described above. Their application to some data unit can give answers to multiple questions. That is why by design <strong>rules</strong> (functions that answer one certain question about one type of data unit) are combined in <strong>rule packs</strong> (functions that answer multiple questions about one type of data unit).</p>
+
 <p>Application of rule pack to data is connected with several points:</p>
+
 <ul>
 <li>Rule packs should have unique <strong>names</strong> to be used as references.</li>
-<li>By the same reason rules should have names. However uniqueness is necessary only within corresponding rule pack which makes pair ‘pack name’+‘rule name’ a key of identifying the actual rule.</li>
+<li>By the same reason rules should have names. However uniqueness is necessary only within corresponding rule pack which makes pair &#39;pack name&#39;+&#39;rule name&#39; a key of identifying the actual rule.</li>
 <li>Output of rule packs for different data units differ in their structure. Therefore rule packs should have <strong>types</strong> to apply different interpretations to their outputs.</li>
 <li>During the actual validation the most part of results normally indicates obedience to rules. This can cause storing many redundant information in validation results. <code>ruler</code> has option of <strong>removing obeyers</strong> from results during the validation.</li>
 </ul>
+
 <p>In <code>ruler</code> <strong>exposing</strong> data to rules means applying rule packs to data, collecting results in common format and attaching them to the data as an <code>exposure</code> attribute. In this way actual exposure can be done in multiple steps and also be a part of a general data preparation pipeline.</p>
-</div>
-<div id="exposure" class="section level2">
+
 <h2>Exposure</h2>
+
 <p><strong>Exposure</strong> is a format designed to contain uniform information about validation of different data units. For reproducibility it also saves information about applied packs. Basically exposure is a list with two elements:</p>
-<ol style="list-style-type: decimal">
+
+<ol>
 <li><strong>Packs info</strong>: a <code>tibble</code> with the following structure:
+
 <ul>
 <li><em>name</em> &lt;chr&gt; : Name of the pack. If not set manually it will be imputed during exposure.</li>
 <li><em>type</em> &lt;chr&gt; : Name of pack type. Indicates which data unit pack checks.</li>
@@ -273,30 +233,16 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <li><em>remove_obeyers</em> &lt;lgl&gt; : Whether rows about obeyers (data units that obey certain rule) were removed from report after applying pack.</li>
 </ul></li>
 <li><strong>Tidy data validation report</strong>: a <code>tibble</code> with the following structure:
+
 <ul>
-<li><em>pack</em> &lt;chr&gt; : Name of rule pack (from column ‘name’ in packs info).</li>
+<li><em>pack</em> &lt;chr&gt; : Name of rule pack (from column &#39;name&#39; in packs info).</li>
 <li><em>rule</em> &lt;chr&gt; : Name of the rule defined in rule pack.</li>
 <li><em>var</em> &lt;chr&gt; : Name of the data unit variable.</li>
 <li><em>id</em> &lt;int&gt; : Row index of data unit.</li>
 <li><em>value</em> &lt;lgl&gt; : Whether the described data unit obeys the rule.</li>
 </ul></li>
 </ol>
-</div>
-
-
-
-<!-- code folding -->
-
-
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 
 </body>
+
 </html>

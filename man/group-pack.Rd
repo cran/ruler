@@ -21,7 +21,8 @@ describe group. They should be defined during creation with
 This format is inspired by \code{dplyr}'s \link[dplyr:summarise]{summarise()} applied
 to grouped data.
 
-The most common way to define data pack is by creating a \link[magrittr:pipe]{functional sequence} with grouping and ending with
+The most common way to define data pack is by creating a
+\link[magrittr:pipe]{functional sequence} with grouping and ending with
 \code{summarise(...)}.
 }
 \section{Interpretation}{
@@ -44,12 +45,13 @@ in data.
 \examples{
 vs_am_rules <- . \%>\%
   dplyr::group_by(vs, am) \%>\%
-  dplyr::summarise(nrow_low = n(.) > 10,
-                   nrow_up = n(.) < 20,
-                   rowmeans_low = rowMeans(.) > 19)
+  dplyr::summarise(
+    nrow_low = n(.) > 10,
+    nrow_up = n(.) < 20,
+    rowmeans_low = rowMeans(.) > 19
+  )
 
 group_packs(vs_am = vs_am_rules, .group_vars = c("vs", "am"))
-
 }
 \seealso{
 \link[=data-pack]{Data pack}, \link[=column-pack]{Column pack}, \link[=row-pack]{row pack}, \link[=cell-pack]{cell pack}.

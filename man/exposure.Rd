@@ -25,7 +25,7 @@ remove_exposure(.object)
 \code{remove_exposure()} returns \code{object} with removed attributed 'exposure'.
 }
 \description{
-Exposure is a result of \link[ruler:expose]{exposing} data to rules. It is
+Exposure is a result of \link[=expose]{exposing} data to rules. It is
 implemented with S3 class \code{exposure} which is a list of the following
 structure: \code{packs_info} - a \link{packs_info} object; \code{report} -
 \link[=ruler-report]{tidy data validation report}.
@@ -47,5 +47,4 @@ is_exposure(mtcars_exposure)
 identical(remove_exposure(mtcars_exposed), mtcars)
 
 identical(get_exposure(mtcars_exposure), mtcars_exposure)
-
 }
