@@ -27,8 +27,8 @@
 #'   Default value for `.rule_sep` is the regular expression `characters
 #'   ._. surrounded by non alphanumeric characters`. It is picked to be used
 #'   smoothly with `dplyr`'s [scoped verbs][dplyr::scoped] and [rules()] instead
-#'   of [funs()][dplyr::funs()]. In most cases it shouldn't be changed but if
-#'   needed it should align with `.prefix` in [rules()].
+#'   of pure list. In most cases it shouldn't be changed but if needed it
+#'   should align with `.prefix` in [rules()].
 #'
 #' @section Guessing:
 #'   To work properly in some edge cases one should specify pack types with
@@ -121,7 +121,7 @@ expose <- function(.tbl, ..., .rule_sep = inside_punct("\\._\\."),
     unkey() %>%
     use_id()
   packs <- rlang::dots_list(...) %>%
-    rlang::squash()
+    squash()
 
   res_exposure <- lapply(
     packs, expose_single,
@@ -285,7 +285,7 @@ interp_data_pack_out <- function(.pack_out) {
       !!!rlang::syms(colnames(.pack_out))
     ) %>%
     mutate(var = ".all", id = 0L) %>%
-    select(.data$rule, .data$var, .data$id, .data$value)
+    select("rule", "var", "id", "value")
 }
 
 interp_group_pack_out <- function(.pack_out, .group_vars, .group_sep,
@@ -320,7 +320,7 @@ interp_col_pack_out <- function(.pack_out, .rule_sep) {
       regex = rule_sep_regex
     ) %>%
     mutate(id = 0L) %>%
-    select(.data$rule, .data$var, .data$id, .data$value)
+    select("rule", "var", "id", "value")
 }
 
 interp_row_pack_out <- function(.pack_out) {
@@ -335,7 +335,7 @@ interp_row_pack_out <- function(.pack_out) {
       !!!rlang::syms(colnames(.pack_out))
     ) %>%
     mutate(var = ".all") %>%
-    select(.data$rule, .data$var, .data$id, .data$value)
+    select("rule", "var", "id", "value")
 }
 
 interp_cell_pack_out <- function(.pack_out, .rule_sep) {
@@ -357,5 +357,5 @@ interp_cell_pack_out <- function(.pack_out, .rule_sep) {
       col = "var_rule", into = c("var", "rule"),
       regex = rule_sep_regex
     ) %>%
-    select(.data$rule, .data$var, .data$id, .data$value)
+    select("rule", "var", "id", "value")
 }

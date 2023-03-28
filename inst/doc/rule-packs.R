@@ -41,7 +41,7 @@ is_integerish <- function(x) {
 }
 
 mtcars %>%
-  summarise_if(is_integerish, funs(mean_low = mean(.) > 0.5))
+  summarise_if(is_integerish, list(mean_low = ~ mean(.) > 0.5))
 
 ## ----Column rule packs--------------------------------------------------------
 my_col_packs <- col_packs(
@@ -72,7 +72,7 @@ my_row_packs <- row_packs(
 ## ----Cell properties of mtcars------------------------------------------------
 mtcars %>% transmute_if(
   is_integerish,
-  funs(is_common = abs(z_score(.)) < 1)
+  list(is_common = ~ abs(z_score(.)) < 1)
 ) %>%
   slice(20:24)
 

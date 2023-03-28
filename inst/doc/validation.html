@@ -1,429 +1,603 @@
 <!DOCTYPE html>
+
 <html>
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>Exposure</title>
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
-<script type="text/javascript">
-window.onload = function() {
-  var imgs = document.getElementsByTagName('img'), i, img;
-  for (i = 0; i < imgs.length; i++) {
-    img = imgs[i];
-    // center an image if it is the only element of its parent
-    if (img.parentElement.childElementCount === 1)
-      img.parentElement.style.textAlign = 'center';
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Evgeni Chasnovski" />
+
+<meta name="date" content="2023-03-28" />
+
+<title>Validation</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
   }
-};
+});
 </script>
 
-<!-- Styles for R syntax highlighter -->
 <style type="text/css">
-   pre .operator,
-   pre .paren {
-     color: rgb(104, 118, 135)
-   }
-
-   pre .literal {
-     color: #990073
-   }
-
-   pre .number {
-     color: #099;
-   }
-
-   pre .comment {
-     color: #998;
-     font-style: italic
-   }
-
-   pre .keyword {
-     color: #900;
-     font-weight: bold
-   }
-
-   pre .identifier {
-     color: rgb(0, 0, 0);
-   }
-
-   pre .string {
-     color: #d14;
-   }
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
 </style>
 
-<!-- R syntax highlighter -->
-<script type="text/javascript">
-var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
-hljs.initHighlightingOnLoad();
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
 </script>
 
 
 
-<style type="text/css">
-body, td {
-   font-family: sans-serif;
-   background-color: white;
-   font-size: 13px;
-}
 
-body {
-  max-width: 800px;
-  margin: auto;
-  padding: 1em;
-  line-height: 20px;
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
 }
-
-tt, code, pre {
-   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
 }
-
-h1 {
-   font-size:2.2em;
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
 }
-
-h2 {
-   font-size:1.8em;
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
 }
-
-h3 {
-   font-size:1.4em;
+#TOC ul ul {
+margin-left: -2em;
 }
-
-h4 {
-   font-size:1.0em;
+#TOC li {
+line-height: 16px;
 }
-
-h5 {
-   font-size:0.9em;
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
 }
-
-h6 {
-   font-size:0.8em;
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
 }
-
-a:visited {
-   color: rgb(50%, 0%, 50%);
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
 }
-
-pre, img {
-  max-width: 100%;
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
 }
 pre {
-  overflow-x: auto;
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
 }
-pre code {
-   display: block; padding: 0.5em;
+pre:not([class]) {
+background-color: #f7f7f7;
 }
-
 code {
-  font-size: 92%;
-  border: 1px solid #ccc;
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
 }
-
-code[class] {
-  background-color: #F8F8F8;
+p > code, li > code {
+padding: 2px 0px;
 }
-
-table, td, th {
-  border: none;
+div.figure {
+text-align: center;
 }
-
-blockquote {
-   color:#666666;
-   margin:0;
-   padding-left: 1em;
-   border-left: 0.5em #EEE solid;
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
 }
-
-hr {
-   height: 0px;
-   border-bottom: none;
-   border-top-width: thin;
-   border-top-style: dotted;
-   border-top-color: #999999;
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
 }
-
-@media print {
-   * {
-      background: transparent !important;
-      color: black !important;
-      filter:none !important;
-      -ms-filter: none !important;
-   }
-
-   body {
-      font-size:12pt;
-      max-width:100%;
-   }
-
-   a, a:visited {
-      text-decoration: underline;
-   }
-
-   hr {
-      visibility: hidden;
-      page-break-before: always;
-   }
-
-   pre, blockquote {
-      padding-right: 1em;
-      page-break-inside: avoid;
-   }
-
-   tr, img {
-      page-break-inside: avoid;
-   }
-
-   img {
-      max-width: 100% !important;
-   }
-
-   @page :left {
-      margin: 15mm 20mm 15mm 10mm;
-   }
-
-   @page :right {
-      margin: 15mm 10mm 15mm 20mm;
-   }
-
-   p, h2, h3 {
-      orphans: 3; widows: 3;
-   }
-
-   h2, h3 {
-      page-break-after: avoid;
-   }
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
 }
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
 </style>
+
 
 
 
 </head>
 
 <body>
-<p>This vignette will describe the actual validation step (called &#39;exposure&#39;) of <code>ruler</code> workflow and show some examples of what one can do with validation results. Packs from vignette about rule packs will be used for this.</p>
 
+
+
+
+<h1 class="title toc-ignore">Validation</h1>
+<h4 class="author">Evgeni Chasnovski</h4>
+<h4 class="date">2023-03-28</h4>
+
+
+
+<p>This vignette will describe the actual validation step (called
+‘exposure’) of <code>ruler</code> workflow and show some examples of
+what one can do with validation results. Packs from vignette about rule
+packs will be used for this.</p>
+<div id="exposure" class="section level2">
 <h2>Exposure</h2>
-
+<div id="overview" class="section level3">
 <h3>Overview</h3>
-
-<p><strong>Exposing</strong> data to rules means applying rule packs to data, collecting results in common format and attaching them to the data as an <code>exposure</code> attribute. In this way actual exposure can be done in multiple steps and also be a part of a general data preparation pipeline.</p>
-
-<p>After attaching exposure to data frame one can extract information from it using the following functions:</p>
-
+<p><strong>Exposing</strong> data to rules means applying rule packs to
+data, collecting results in common format and attaching them to the data
+as an <code>exposure</code> attribute. In this way actual exposure can
+be done in multiple steps and also be a part of a general data
+preparation pipeline.</p>
+<p>After attaching exposure to data frame one can extract information
+from it using the following functions:</p>
 <ul>
 <li><code>get_exposure()</code> for exposure.</li>
-<li><code>get_packs_info()</code> for packs info (part of exposure).</li>
-<li><code>get_report()</code> for tidy data validation report (part of exposure).</li>
+<li><code>get_packs_info()</code> for packs info (part of
+exposure).</li>
+<li><code>get_report()</code> for tidy data validation report (part of
+exposure).</li>
 </ul>
-
 <p>For exposing data to rules use <code>expose()</code>:</p>
-
 <ul>
-<li>It takes data as a first argument and rule packs (in pure form or inside list at any depth) of interest after that.</li>
-<li>All rule packs are actually applied to <strong>keyed</strong> version of data (see <a href="https://echasnovski.github.io/keyholder/">keyholder</a>) for reasons described in &ldquo;Rule Packs&rdquo; vignette. If input has keys they are removed and <em>id key</em> is created.</li>
-<li>It is guaranteed that its output is equivalent to the input data frame: only attribute <code>exposure</code> might change. If input has already <code>exposure</code> attached to it then the new one is binded with it.</li>
+<li>It takes data as a first argument and rule packs (in pure form or
+inside list at any depth) of interest after that.</li>
+<li>All rule packs are actually applied to <strong>keyed</strong>
+version of data (see <a href="https://echasnovski.github.io/keyholder/">keyholder</a>) for
+reasons described in “Rule Packs” vignette. If input has keys they are
+removed and <em>id key</em> is created.</li>
+<li>It is guaranteed that its output is equivalent to the input data
+frame: only attribute <code>exposure</code> might change. If input has
+already <code>exposure</code> attached to it then the new one is binded
+with it.</li>
 </ul>
-
 <p>Simple example:</p>
-
-<pre><code class="r">mtcars %&gt;%
-  expose(my_group_packs) %&gt;%
-  get_exposure()
-#&gt;   Exposure
-#&gt; 
-#&gt; Packs info:
-#&gt; # A tibble: 1 x 4
-#&gt;   name          type       fun        remove_obeyers
-#&gt;   &lt;chr&gt;         &lt;chr&gt;      &lt;list&gt;     &lt;lgl&gt;         
-#&gt; 1 group_pack__1 group_pack &lt;grop_pck&gt; TRUE          
-#&gt; 
-#&gt; Tidy data validation report:
-#&gt; # A tibble: 2 x 5
-#&gt;   pack          rule      var      id value
-#&gt;   &lt;chr&gt;         &lt;chr&gt;     &lt;chr&gt; &lt;int&gt; &lt;lgl&gt;
-#&gt; 1 group_pack__1 any_cyl_6 0.0       0 FALSE
-#&gt; 2 group_pack__1 any_cyl_6 1.1       0 FALSE
-</code></pre>
-
-<h3>Don&#39;t remove obeyers</h3>
-
-<p>By default exposing removes obeyers. One can leave obeyers by setting <code>.remove_obeyers</code> to <code>FALSE</code>.</p>
-
-<pre><code class="r">mtcars %&gt;%
-  expose(my_group_packs, .remove_obeyers = FALSE) %&gt;%
-  get_exposure()
-#&gt;   Exposure
-#&gt; 
-#&gt; Packs info:
-#&gt; # A tibble: 1 x 4
-#&gt;   name          type       fun        remove_obeyers
-#&gt;   &lt;chr&gt;         &lt;chr&gt;      &lt;list&gt;     &lt;lgl&gt;         
-#&gt; 1 group_pack__1 group_pack &lt;grop_pck&gt; FALSE         
-#&gt; 
-#&gt; Tidy data validation report:
-#&gt; # A tibble: 4 x 5
-#&gt;   pack          rule      var      id value
-#&gt;   &lt;chr&gt;         &lt;chr&gt;     &lt;chr&gt; &lt;int&gt; &lt;lgl&gt;
-#&gt; 1 group_pack__1 any_cyl_6 0.0       0 FALSE
-#&gt; 2 group_pack__1 any_cyl_6 0.1       0 TRUE 
-#&gt; 3 group_pack__1 any_cyl_6 1.0       0 TRUE 
-#&gt; 4 group_pack__1 any_cyl_6 1.1       0 FALSE
-</code></pre>
-
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  <span class="fu">expose</span>(my_group_packs) <span class="sc">%&gt;%</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  <span class="fu">get_exposure</span>()</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co">#&gt;   Exposure</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="co">#&gt; Packs info:</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 4</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="co">#&gt;   name          type       fun        remove_obeyers</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;      &lt;list&gt;     &lt;lgl&gt;         </span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="co">#&gt; 1 group_pack__1 group_pack &lt;grop_pck&gt; TRUE          </span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="co">#&gt; Tidy data validation report:</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 × 5</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="co">#&gt;   pack          rule      var      id value</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;     &lt;chr&gt; &lt;int&gt; &lt;lgl&gt;</span></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="co">#&gt; 1 group_pack__1 any_cyl_6 0.0       0 FALSE</span></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a><span class="co">#&gt; 2 group_pack__1 any_cyl_6 1.1       0 FALSE</span></span></code></pre></div>
+</div>
+<div id="dont-remove-obeyers" class="section level3">
+<h3>Don’t remove obeyers</h3>
+<p>By default exposing removes obeyers. One can leave obeyers by setting
+<code>.remove_obeyers</code> to <code>FALSE</code>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>  <span class="fu">expose</span>(my_group_packs, <span class="at">.remove_obeyers =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>  <span class="fu">get_exposure</span>()</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#&gt;   Exposure</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt; Packs info:</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 4</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co">#&gt;   name          type       fun        remove_obeyers</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;      &lt;list&gt;     &lt;lgl&gt;         </span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co">#&gt; 1 group_pack__1 group_pack &lt;grop_pck&gt; FALSE         </span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="co">#&gt; Tidy data validation report:</span></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="co">#&gt; # A tibble: 4 × 5</span></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="co">#&gt;   pack          rule      var      id value</span></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;     &lt;chr&gt; &lt;int&gt; &lt;lgl&gt;</span></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="co">#&gt; 1 group_pack__1 any_cyl_6 0.0       0 FALSE</span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="co">#&gt; 2 group_pack__1 any_cyl_6 0.1       0 TRUE </span></span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="co">#&gt; 3 group_pack__1 any_cyl_6 1.0       0 TRUE </span></span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a><span class="co">#&gt; 4 group_pack__1 any_cyl_6 1.1       0 FALSE</span></span></code></pre></div>
+</div>
+<div id="set-pack-name" class="section level3">
 <h3>Set pack name</h3>
-
-<p>Notice imputed group pack name <code>group_pack__1</code>. To change it one can set name during creation with <code>group_packs()</code> or write the following:</p>
-
-<pre><code class="r">mtcars %&gt;%
-  expose(new_group_pack = my_group_packs[[1]]) %&gt;%
-  get_report()
-#&gt; Tidy data validation report:
-#&gt; # A tibble: 2 x 5
-#&gt;   pack           rule      var      id value
-#&gt;   &lt;chr&gt;          &lt;chr&gt;     &lt;chr&gt; &lt;int&gt; &lt;lgl&gt;
-#&gt; 1 new_group_pack any_cyl_6 0.0       0 FALSE
-#&gt; 2 new_group_pack any_cyl_6 1.1       0 FALSE
-</code></pre>
-
+<p>Notice imputed group pack name <code>group_pack__1</code>. To change
+it one can set name during creation with <code>group_packs()</code> or
+write the following:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>  <span class="fu">expose</span>(<span class="at">new_group_pack =</span> my_group_packs[[<span class="dv">1</span>]]) <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>  <span class="fu">get_report</span>()</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co">#&gt; Tidy data validation report:</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 × 5</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt;   pack           rule      var      id value</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;          &lt;chr&gt;     &lt;chr&gt; &lt;int&gt; &lt;lgl&gt;</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co">#&gt; 1 new_group_pack any_cyl_6 0.0       0 FALSE</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co">#&gt; 2 new_group_pack any_cyl_6 1.1       0 FALSE</span></span></code></pre></div>
+</div>
+<div id="expose-step-by-step" class="section level3">
 <h3>Expose step by step</h3>
-
 <p>One can expose to several packs at ones or do it step by step:</p>
-
-<pre><code class="r">mtcars_one_step &lt;- mtcars %&gt;%
-  expose(my_data_packs, my_col_packs)
-
-mtcars_two_step &lt;- mtcars %&gt;%
-  expose(my_data_packs) %&gt;%
-  expose(my_col_packs)
-
-identical(mtcars_one_step, mtcars_two_step)
-#&gt; [1] TRUE
-</code></pre>
-
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>mtcars_one_step <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>  <span class="fu">expose</span>(my_data_packs, my_col_packs)</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>mtcars_two_step <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>  <span class="fu">expose</span>(my_data_packs) <span class="sc">%&gt;%</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>  <span class="fu">expose</span>(my_col_packs)</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="fu">identical</span>(mtcars_one_step, mtcars_two_step)</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
+</div>
+<div id="guessing" class="section level3">
 <h3>Guessing</h3>
-
-<p>By default <code>expose()</code> guesses which type of pack function represents (if it is not set manually). This is useful for interactive experiments. Guess is based on features of pack&#39;s output structures (see <code>?expose</code> for more details).</p>
-
-<pre><code class="r">mtcars %&gt;%
-  expose(some_data_pack = . %&gt;% summarise(nrow = nrow(.) == 10)) %&gt;%
-  get_exposure()
-#&gt;   Exposure
-#&gt; 
-#&gt; Packs info:
-#&gt; # A tibble: 1 x 4
-#&gt;   name           type      fun        remove_obeyers
-#&gt;   &lt;chr&gt;          &lt;chr&gt;     &lt;list&gt;     &lt;lgl&gt;         
-#&gt; 1 some_data_pack data_pack &lt;data_pck&gt; TRUE          
-#&gt; 
-#&gt; Tidy data validation report:
-#&gt; # A tibble: 1 x 5
-#&gt;   pack           rule  var      id value
-#&gt;   &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;lgl&gt;
-#&gt; 1 some_data_pack nrow  .all      0 FALSE
-</code></pre>
-
-<p>However there are some edge cases (especially for group packs). To write strict and robust code one should use <code>.guess = FALSE</code> option.</p>
-
-<pre><code class="r">mtcars %&gt;%
-  expose(some_data_pack = . %&gt;% summarise(nrow = nrow(.) == 10),
-    .guess = FALSE)
-#&gt; Error in expose_single.default(X[[i]], ...): There is unsupported class of rule pack.
-</code></pre>
-
+<p>By default <code>expose()</code> guesses which type of pack function
+represents (if it is not set manually). This is useful for interactive
+experiments. Guess is based on features of pack’s output structures (see
+<code>?expose</code> for more details).</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>  <span class="fu">expose</span>(<span class="at">some_data_pack =</span> . <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">nrow =</span> <span class="fu">nrow</span>(.) <span class="sc">==</span> <span class="dv">10</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>  <span class="fu">get_exposure</span>()</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co">#&gt;   Exposure</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co">#&gt; Packs info:</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 4</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="co">#&gt;   name           type      fun        remove_obeyers</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;          &lt;chr&gt;     &lt;list&gt;     &lt;lgl&gt;         </span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="co">#&gt; 1 some_data_pack data_pack &lt;data_pck&gt; TRUE          </span></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="co">#&gt; Tidy data validation report:</span></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 5</span></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a><span class="co">#&gt;   pack           rule  var      id value</span></span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;lgl&gt;</span></span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="co">#&gt; 1 some_data_pack nrow  .all      0 FALSE</span></span></code></pre></div>
+<p>However there are some edge cases (especially for group packs). To
+write strict and robust code one should use <code>.guess = FALSE</code>
+option.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>  <span class="fu">expose</span>(<span class="at">some_data_pack =</span> . <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">nrow =</span> <span class="fu">nrow</span>(.) <span class="sc">==</span> <span class="dv">10</span>),</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>    <span class="at">.guess =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co">#&gt; Error in expose_single.default(X[[i]], ...): There is unsupported class of rule pack.</span></span></code></pre></div>
+</div>
+<div id="using-different-rule-separator" class="section level3">
 <h3>Using different rule separator</h3>
-
-<p>If for some reason not default rule separator was used in <code>rules()</code> one should take this into consideration by using argument <code>.rule_sep</code>. It takes regular expression describing the separator. <strong>Note</strong> that by default it is a string &#39;._.&#39; surrounded by any number of &#39;non alpha-numeric characters&#39; (with use of <code>inside_punct()</code>). This is done to take account of the <code>dplyr</code>&#39;s default separator <code>_</code>.</p>
-
-<pre><code class="r">regular_col_packs &lt;- col_packs(
-  . %&gt;% summarise_all(rules(mean(.) &gt; 1))
-)
-
-irregular_col_packs &lt;- col_packs(
-  . %&gt;% summarise_all(rules(mean(.) &gt; 1, .prefix = &quot;a_a_&quot;))
-)
-
-regular_report &lt;- mtcars %&gt;%
-  expose(regular_col_packs) %&gt;%
-  get_report()
-
-irregular_report &lt;- mtcars %&gt;%
-  expose(irregular_col_packs, .rule_sep = inside_punct(&quot;a_a_&quot;)) %&gt;%
-  get_report()
-
-identical(regular_report, irregular_report)
-#&gt; [1] TRUE
-
-# Note suffix &#39;_&#39; after column names
-mtcars %&gt;%
-  expose(irregular_col_packs, .rule_sep = &quot;a_a_&quot;) %&gt;%
-  get_report()
-#&gt; Tidy data validation report:
-#&gt; # A tibble: 2 x 5
-#&gt;   pack        rule    var      id value
-#&gt;   &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt; &lt;int&gt; &lt;lgl&gt;
-#&gt; 1 col_pack__1 rule__1 vs_       0 FALSE
-#&gt; 2 col_pack__1 rule__1 am_       0 FALSE
-</code></pre>
-
+<p>If for some reason not default rule separator was used in
+<code>rules()</code> one should take this into consideration by using
+argument <code>.rule_sep</code>. It takes regular expression describing
+the separator. <strong>Note</strong> that by default it is a string
+‘._.’ surrounded by any number of ‘non alpha-numeric characters’ (with
+use of <code>inside_punct()</code>). This is done to take account of the
+<code>dplyr</code>’s default separator <code>_</code>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>regular_col_packs <span class="ot">&lt;-</span> <span class="fu">col_packs</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>  . <span class="sc">%&gt;%</span> <span class="fu">summarise_all</span>(<span class="fu">rules</span>(<span class="fu">mean</span>(.) <span class="sc">&gt;</span> <span class="dv">1</span>))</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>)</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>irregular_col_packs <span class="ot">&lt;-</span> <span class="fu">col_packs</span>(</span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>  . <span class="sc">%&gt;%</span> <span class="fu">summarise_all</span>(<span class="fu">rules</span>(<span class="fu">mean</span>(.) <span class="sc">&gt;</span> <span class="dv">1</span>, <span class="at">.prefix =</span> <span class="st">&quot;a_a_&quot;</span>))</span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>)</span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>regular_report <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>  <span class="fu">expose</span>(regular_col_packs) <span class="sc">%&gt;%</span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>  <span class="fu">get_report</span>()</span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a>irregular_report <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>  <span class="fu">expose</span>(irregular_col_packs, <span class="at">.rule_sep =</span> <span class="fu">inside_punct</span>(<span class="st">&quot;a_a_&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>  <span class="fu">get_report</span>()</span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a><span class="fu">identical</span>(regular_report, irregular_report)</span>
+<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a><span class="co">#&gt; [1] TRUE</span></span>
+<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a><span class="co"># Note suffix &#39;_&#39; after column names</span></span>
+<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a>  <span class="fu">expose</span>(irregular_col_packs, <span class="at">.rule_sep =</span> <span class="st">&quot;a_a_&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a>  <span class="fu">get_report</span>()</span>
+<span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a><span class="co">#&gt; Tidy data validation report:</span></span>
+<span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 × 5</span></span>
+<span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a><span class="co">#&gt;   pack        rule    var      id value</span></span>
+<span id="cb7-27"><a href="#cb7-27" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt; &lt;int&gt; &lt;lgl&gt;</span></span>
+<span id="cb7-28"><a href="#cb7-28" tabindex="-1"></a><span class="co">#&gt; 1 col_pack__1 rule__1 vs_       0 FALSE</span></span>
+<span id="cb7-29"><a href="#cb7-29" tabindex="-1"></a><span class="co">#&gt; 2 col_pack__1 rule__1 am_       0 FALSE</span></span></code></pre></div>
+</div>
+</div>
+<div id="acting-after-exposure" class="section level2">
 <h2>Acting after exposure</h2>
-
+<div id="general-actions" class="section level3">
 <h3>General actions</h3>
-
-<p>With exposure attached to data one can perform different kinds of actions: exploration, assertion, imputation and so on.</p>
-
-<p>General actions are recommended to be done with <code>act_after_exposure()</code>. It takes two arguments:</p>
-
+<p>With exposure attached to data one can perform different kinds of
+actions: exploration, assertion, imputation and so on.</p>
+<p>General actions are recommended to be done with
+<code>act_after_exposure()</code>. It takes two arguments:</p>
 <ul>
-<li><code>.trigger</code> - a function which takes the data with attached exposure and returns <code>TRUE</code> if some action should be made.</li>
-<li><code>.actor</code> - a function which takes the same argument as <code>.trigger</code> and performs some action.</li>
+<li><code>.trigger</code> - a function which takes the data with
+attached exposure and returns <code>TRUE</code> if some action should be
+made.</li>
+<li><code>.actor</code> - a function which takes the same argument as
+<code>.trigger</code> and performs some action.</li>
 </ul>
-
-<p>If trigger didn&#39;t notify then the input data is returned untouched. Otherwise the output of <code>.actor()</code> is returned. <strong>Note</strong> that <code>act_after_exposure()</code> is often used for creating side effects (printing, throwing error etc.) and in that case should invisibly return its input (to be able to use it with pipe <code>%&gt;%</code>).</p>
-
-<pre><code class="r">trigger_one_pack &lt;- function(.tbl) {
-  packs_number &lt;- .tbl %&gt;%
-    get_packs_info() %&gt;%
-    nrow()
-
-  packs_number &gt; 1
-}
-
-actor_one_pack &lt;- function(.tbl) {
-  cat(&quot;More than one pack was applied.\n&quot;)
-
-  invisible(.tbl)
-}
-
-mtcars %&gt;%
-  expose(my_col_packs, my_row_packs) %&gt;%
-  act_after_exposure(
-    .trigger = trigger_one_pack,
-    .actor = actor_one_pack
-  ) %&gt;%
-  invisible()
-#&gt; More than one pack was applied.
-</code></pre>
-
+<p>If trigger didn’t notify then the input data is returned untouched.
+Otherwise the output of <code>.actor()</code> is returned.
+<strong>Note</strong> that <code>act_after_exposure()</code> is often
+used for creating side effects (printing, throwing error etc.) and in
+that case should invisibly return its input (to be able to use it with
+pipe <code>%&gt;%</code>).</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>trigger_one_pack <span class="ot">&lt;-</span> <span class="cf">function</span>(.tbl) {</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>  packs_number <span class="ot">&lt;-</span> .tbl <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>    <span class="fu">get_packs_info</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>    <span class="fu">nrow</span>()</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>  packs_number <span class="sc">&gt;</span> <span class="dv">1</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>}</span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>actor_one_pack <span class="ot">&lt;-</span> <span class="cf">function</span>(.tbl) {</span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;More than one pack was applied.</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>  <span class="fu">invisible</span>(.tbl)</span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a>}</span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a>  <span class="fu">expose</span>(my_col_packs, my_row_packs) <span class="sc">%&gt;%</span></span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a>  <span class="fu">act_after_exposure</span>(</span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a>    <span class="at">.trigger =</span> trigger_one_pack,</span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a>    <span class="at">.actor =</span> actor_one_pack</span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a>  <span class="fu">invisible</span>()</span>
+<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a><span class="co">#&gt; More than one pack was applied.</span></span></code></pre></div>
+</div>
+<div id="assert-presence-of-rule-breaker" class="section level3">
 <h3>Assert presence of rule breaker</h3>
+<p><code>ruler</code> has function <code>assert_any_breaker()</code>
+which can notify about presence of any breaker in exposure.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>  <span class="fu">expose</span>(my_col_packs, my_row_packs) <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>  <span class="fu">assert_any_breaker</span>()</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co">#&gt;   Breakers report</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="co">#&gt; Tidy data validation report:</span></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="co">#&gt; # A tibble: 4 × 5</span></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co">#&gt;   pack          rule               var      id value</span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;              &lt;chr&gt; &lt;int&gt; &lt;lgl&gt;</span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="co">#&gt; 1 my_col_pack_1 mean_low           vs        0 FALSE</span></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="co">#&gt; 2 my_col_pack_1 mean_low           am        0 FALSE</span></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="co">#&gt; 3 col_pack__2   rule__1            vs        0 FALSE</span></span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="co">#&gt; 4 my_row_pack_1 is_common_row_mean .all     15 FALSE</span></span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="co">#&gt; Error: assert_any_breaker: Some breakers found in exposure.</span></span></code></pre></div>
+</div>
+</div>
 
-<p><code>ruler</code> has function <code>assert_any_breaker()</code> which can notify about presence of any breaker in exposure.</p>
 
-<pre><code class="r">mtcars %&gt;%
-  expose(my_col_packs, my_row_packs) %&gt;%
-  assert_any_breaker()
-#&gt;   Breakers report
-#&gt; Tidy data validation report:
-#&gt; # A tibble: 4 x 5
-#&gt;   pack          rule               var      id value
-#&gt;   &lt;chr&gt;         &lt;chr&gt;              &lt;chr&gt; &lt;int&gt; &lt;lgl&gt;
-#&gt; 1 my_col_pack_1 mean_low           vs        0 FALSE
-#&gt; 2 my_col_pack_1 mean_low           am        0 FALSE
-#&gt; 3 col_pack__2   rule__1            vs        0 FALSE
-#&gt; 4 my_row_pack_1 is_common_row_mean .all     15 FALSE
-#&gt; Error: assert_any_breaker: Some breakers found in exposure.
-</code></pre>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 </body>
-
 </html>

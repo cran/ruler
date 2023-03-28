@@ -1,451 +1,631 @@
 <!DOCTYPE html>
+
 <html>
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>Overview</title>
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
-<script type="text/javascript">
-window.onload = function() {
-  var imgs = document.getElementsByTagName('img'), i, img;
-  for (i = 0; i < imgs.length; i++) {
-    img = imgs[i];
-    // center an image if it is the only element of its parent
-    if (img.parentElement.childElementCount === 1)
-      img.parentElement.style.textAlign = 'center';
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Evgeni Chasnovski" />
+
+<meta name="date" content="2023-03-28" />
+
+<title>Rule Packs</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
   }
-};
+});
 </script>
 
-<!-- Styles for R syntax highlighter -->
 <style type="text/css">
-   pre .operator,
-   pre .paren {
-     color: rgb(104, 118, 135)
-   }
-
-   pre .literal {
-     color: #990073
-   }
-
-   pre .number {
-     color: #099;
-   }
-
-   pre .comment {
-     color: #998;
-     font-style: italic
-   }
-
-   pre .keyword {
-     color: #900;
-     font-weight: bold
-   }
-
-   pre .identifier {
-     color: rgb(0, 0, 0);
-   }
-
-   pre .string {
-     color: #d14;
-   }
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
 </style>
 
-<!-- R syntax highlighter -->
-<script type="text/javascript">
-var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
-hljs.initHighlightingOnLoad();
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
 </script>
 
 
 
-<style type="text/css">
-body, td {
-   font-family: sans-serif;
-   background-color: white;
-   font-size: 13px;
-}
 
-body {
-  max-width: 800px;
-  margin: auto;
-  padding: 1em;
-  line-height: 20px;
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
 }
-
-tt, code, pre {
-   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
 }
-
-h1 {
-   font-size:2.2em;
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
 }
-
-h2 {
-   font-size:1.8em;
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
 }
-
-h3 {
-   font-size:1.4em;
+#TOC ul ul {
+margin-left: -2em;
 }
-
-h4 {
-   font-size:1.0em;
+#TOC li {
+line-height: 16px;
 }
-
-h5 {
-   font-size:0.9em;
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
 }
-
-h6 {
-   font-size:0.8em;
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
 }
-
-a:visited {
-   color: rgb(50%, 0%, 50%);
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
 }
-
-pre, img {
-  max-width: 100%;
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
 }
 pre {
-  overflow-x: auto;
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
 }
-pre code {
-   display: block; padding: 0.5em;
+pre:not([class]) {
+background-color: #f7f7f7;
 }
-
 code {
-  font-size: 92%;
-  border: 1px solid #ccc;
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
 }
-
-code[class] {
-  background-color: #F8F8F8;
+p > code, li > code {
+padding: 2px 0px;
 }
-
-table, td, th {
-  border: none;
+div.figure {
+text-align: center;
 }
-
-blockquote {
-   color:#666666;
-   margin:0;
-   padding-left: 1em;
-   border-left: 0.5em #EEE solid;
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
 }
-
-hr {
-   height: 0px;
-   border-bottom: none;
-   border-top-width: thin;
-   border-top-style: dotted;
-   border-top-color: #999999;
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
 }
-
-@media print {
-   * {
-      background: transparent !important;
-      color: black !important;
-      filter:none !important;
-      -ms-filter: none !important;
-   }
-
-   body {
-      font-size:12pt;
-      max-width:100%;
-   }
-
-   a, a:visited {
-      text-decoration: underline;
-   }
-
-   hr {
-      visibility: hidden;
-      page-break-before: always;
-   }
-
-   pre, blockquote {
-      padding-right: 1em;
-      page-break-inside: avoid;
-   }
-
-   tr, img {
-      page-break-inside: avoid;
-   }
-
-   img {
-      max-width: 100% !important;
-   }
-
-   @page :left {
-      margin: 15mm 20mm 15mm 10mm;
-   }
-
-   @page :right {
-      margin: 15mm 10mm 15mm 20mm;
-   }
-
-   p, h2, h3 {
-      orphans: 3; widows: 3;
-   }
-
-   h2, h3 {
-      page-break-after: avoid;
-   }
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
 }
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
 </style>
+
 
 
 
 </head>
 
 <body>
-<p>This vignette describes and explains logic behind common ways of creating rule packs.</p>
 
+
+
+
+<h1 class="title toc-ignore">Rule Packs</h1>
+<h4 class="author">Evgeni Chasnovski</h4>
+<h4 class="date">2023-03-28</h4>
+
+
+
+<p>This vignette describes and explains logic behind common ways of
+creating rule packs.</p>
+<div id="overview" class="section level2">
 <h2>Overview</h2>
-
-<p><strong>Rule</strong> is a function which converts data unit of interest (data, group, column, row, cell) to logical value indicating whether this object satisfies certain condition.</p>
-
-<p><strong>Rule pack</strong> is a function which combines several rules for common data unit into one functional block. The recommended way of creating rules is by creating packs right away with the use of <code>dplyr</code> and <a href="https://magrittr.tidyverse.org/">magrittr</a>&#39;s pipe operator.</p>
-
-<p>Some of <code>ruler</code>&#39;s functionality is powered by the <a href="https://echasnovski.github.io/keyholder/">keyholder</a> package. It is highly recommended to use its supported functions during rule pack construction. All one- and two-table <code>dplyr</code> verbs applied to local data frames are supported and considered the most appropriate way to create rule packs.</p>
-
-<p>As described in vignette about design process it is necessary for rule pack to have <strong>type</strong> because outputs for different data units have different structure. For this reason <code>ruler</code> has family of <code>*_packs()</code> constructors (where <code>*</code> stands for the name of data unit):</p>
-
+<p><strong>Rule</strong> is a function which converts data unit of
+interest (data, group, column, row, cell) to logical value indicating
+whether this object satisfies certain condition.</p>
+<p><strong>Rule pack</strong> is a function which combines several rules
+for common data unit into one functional block. The recommended way of
+creating rules is by creating packs right away with the use of
+<code>dplyr</code> and <a href="https://magrittr.tidyverse.org/">magrittr</a>’s pipe operator.</p>
+<p>Some of <code>ruler</code>’s functionality is powered by the <a href="https://echasnovski.github.io/keyholder/">keyholder</a> package.
+It is highly recommended to use its supported functions during rule pack
+construction. All one- and two-table <code>dplyr</code> verbs applied to
+local data frames are supported and considered the most appropriate way
+to create rule packs.</p>
+<p>As described in vignette about design process it is necessary for
+rule pack to have <strong>type</strong> because outputs for different
+data units have different structure. For this reason <code>ruler</code>
+has family of <code>*_packs()</code> constructors (where <code>*</code>
+stands for the name of data unit):</p>
 <ul>
-<li>They take functions defining packs (in pure form or inside list at any depth) as arguments. It is recommended to name those arguments with future pack names. If no name is supplied then it will be imputed during exposure.</li>
+<li>They take functions defining packs (in pure form or inside list at
+any depth) as arguments. It is recommended to name those arguments with
+future pack names. If no name is supplied then it will be imputed during
+exposure.</li>
 <li>They return list of what should be rule packs of certain type.</li>
 </ul>
-
+</div>
+<div id="data-rule-packs" class="section level2">
 <h2>Data rule packs</h2>
-
-<p>To check whether dimensions of <code>mtcars</code> obey some rules one can write the next
-dplyr pipeline:</p>
-
-<pre><code class="r">mtcars %&gt;% summarise(
-  nrow_low = nrow(.) &gt; 10,
-  nrow_high = nrow(.) &lt; 30,
-  ncol = ncol(.) == 12
-)
-#&gt;   nrow_low nrow_high  ncol
-#&gt; 1     TRUE     FALSE FALSE
-</code></pre>
-
+<p>To check whether dimensions of <code>mtcars</code> obey some rules
+one can write the next dplyr pipeline:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  <span class="at">nrow_low =</span> <span class="fu">nrow</span>(.) <span class="sc">&gt;</span> <span class="dv">10</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  <span class="at">nrow_high =</span> <span class="fu">nrow</span>(.) <span class="sc">&lt;</span> <span class="dv">30</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="fu">ncol</span>(.) <span class="sc">==</span> <span class="dv">12</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>)</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="co">#&gt;   nrow_low nrow_high  ncol</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="co">#&gt; 1     TRUE     FALSE FALSE</span></span></code></pre></div>
 <p>The output has the following structure:</p>
-
 <ul>
 <li>Number of rows equals to <strong>one</strong>.</li>
 <li>Column names define <strong>rule names</strong>.</li>
-<li>Values indicate whether the <strong>data as a whole</strong> follows the rule.</li>
+<li>Values indicate whether the <strong>data as a whole</strong> follows
+the rule.</li>
 </ul>
-
-<p>There is an easy way to transform this pipeline into a function to be used for any data: <code>mtcars</code> should be replaced with <code>.</code> character. To indicate that this function is a rule pack for data unit &#39;data&#39; it should be wrapped with <code>data_packs()</code>.</p>
-
-<p>The next code creates a list <code>my_data_packs</code> with one data rule pack named <code>my_data_pack_1</code>. That rule pack defines rules with names <code>nrow_low</code>, <code>nrow_high</code>, <code>ncol</code>.</p>
-
-<pre><code class="r">my_data_packs &lt;- data_packs(
-  my_data_pack_1 = . %&gt;% summarise(
-    nrow_low = nrow(.) &gt; 10,
-    nrow_high = nrow(.) &lt; 30,
-    ncol = ncol(.) == 12
-  )
-)
-</code></pre>
-
+<p>There is an easy way to transform this pipeline into a function to be
+used for any data: <code>mtcars</code> should be replaced with
+<code>.</code> character. To indicate that this function is a rule pack
+for data unit ‘data’ it should be wrapped with
+<code>data_packs()</code>.</p>
+<p>The next code creates a list <code>my_data_packs</code> with one data
+rule pack named <code>my_data_pack_1</code>. That rule pack defines
+rules with names <code>nrow_low</code>, <code>nrow_high</code>,
+<code>ncol</code>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>my_data_packs <span class="ot">&lt;-</span> <span class="fu">data_packs</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>  <span class="at">my_data_pack_1 =</span> . <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>    <span class="at">nrow_low =</span> <span class="fu">nrow</span>(.) <span class="sc">&gt;</span> <span class="dv">10</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>    <span class="at">nrow_high =</span> <span class="fu">nrow</span>(.) <span class="sc">&lt;</span> <span class="dv">30</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>    <span class="at">ncol =</span> <span class="fu">ncol</span>(.) <span class="sc">==</span> <span class="dv">12</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>  )</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>)</span></code></pre></div>
+</div>
+<div id="group-rule-packs" class="section level2">
 <h2>Group rule packs</h2>
-
-<p>To check whether certain groups of rows of <code>mtcars</code> obey some rules one can write the next dplyr pipeline:</p>
-
-<pre><code class="r">mtcars %&gt;% group_by(vs, am) %&gt;%
-  summarise(any_cyl_6 = any(cyl == 6))
-#&gt; `summarise()` regrouping output by &#39;vs&#39; (override with `.groups` argument)
-#&gt; # A tibble: 4 x 3
-#&gt; # Groups:   vs [2]
-#&gt;      vs    am any_cyl_6
-#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;    
-#&gt; 1     0     0 FALSE    
-#&gt; 2     0     1 TRUE     
-#&gt; 3     1     0 TRUE     
-#&gt; 4     1     1 FALSE
-</code></pre>
-
+<p>To check whether certain groups of rows of <code>mtcars</code> obey
+some rules one can write the next dplyr pipeline:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(vs, am) <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">any_cyl_6 =</span> <span class="fu">any</span>(cyl <span class="sc">==</span> <span class="dv">6</span>))</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">#&gt; `summarise()` has grouped output by &#39;vs&#39;. You can override using the `.groups`</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co">#&gt; argument.</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt; # A tibble: 4 × 3</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt; # Groups:   vs [2]</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#&gt;      vs    am any_cyl_6</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;    </span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co">#&gt; 1     0     0 FALSE    </span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co">#&gt; 2     0     1 TRUE     </span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="co">#&gt; 3     1     0 TRUE     </span></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="co">#&gt; 4     1     1 FALSE</span></span></code></pre></div>
 <p>The output has the following structure:</p>
-
 <ul>
-<li>Some columns define group levels (<code>vs</code> and <code>am</code> in this case).</li>
-<li>Number of rows equals to <strong>number of validated groups</strong>.</li>
-<li>Names of non-grouping columns define <strong>rule names</strong>.</li>
-<li>Values indicate whether the <strong>group as a whole</strong> follows the rule.</li>
+<li>Some columns define group levels (<code>vs</code> and
+<code>am</code> in this case).</li>
+<li>Number of rows equals to <strong>number of validated
+groups</strong>.</li>
+<li>Names of non-grouping columns define <strong>rule
+names</strong>.</li>
+<li>Values indicate whether the <strong>group as a whole</strong>
+follows the rule.</li>
 </ul>
-
-<p>The next code creates a list with one nameless group rule pack (the name will be
-imputed during exposure). This pack contains one rule <code>any_cyl_6</code> which checks every group defined by <code>vs</code> and <code>am</code> columns.</p>
-
-<pre><code class="r">my_group_packs &lt;- group_packs(
-  . %&gt;% group_by(vs, am) %&gt;%
-    summarise(any_cyl_6 = any(cyl == 6)),
-  .group_vars = c(&quot;vs&quot;, &quot;am&quot;)
-)
-</code></pre>
-
+<p>The next code creates a list with one nameless group rule pack (the
+name will be imputed during exposure). This pack contains one rule
+<code>any_cyl_6</code> which checks every group defined by
+<code>vs</code> and <code>am</code> columns.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>my_group_packs <span class="ot">&lt;-</span> <span class="fu">group_packs</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>  . <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(vs, am) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">any_cyl_6 =</span> <span class="fu">any</span>(cyl <span class="sc">==</span> <span class="dv">6</span>)),</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>  <span class="at">.group_vars =</span> <span class="fu">c</span>(<span class="st">&quot;vs&quot;</span>, <span class="st">&quot;am&quot;</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>)</span></code></pre></div>
 <p><strong>Notes</strong>:</p>
-
 <ul>
-<li>In this example pack&#39;s output is a grouped tibble. It doesn&#39;t affect anything because during exposure this output is <code>ungroup</code>ed.</li>
-<li>Names of grouping columns should be supplied with <code>.group_vars</code> argument to distinguish them from non-grouping ones.</li>
-<li>Value for <code>var</code> column in validation report is created by <a href="https://tidyr.tidyverse.org/reference/unite.html">uniting</a> them with the default separator <code>.</code>. In this case values will be <code>0.0</code>, <code>0.1</code>, <code>1.0</code>, <code>1.1</code>. To change separator supply it with <code>.group_sep</code> argument.</li>
+<li>In this example pack’s output is a grouped tibble. It doesn’t affect
+anything because during exposure this output is
+<code>ungroup</code>ed.</li>
+<li>Names of grouping columns should be supplied with
+<code>.group_vars</code> argument to distinguish them from non-grouping
+ones.</li>
+<li>Value for <code>var</code> column in validation report is created by
+<a href="https://tidyr.tidyverse.org/reference/unite.html">uniting</a>
+them with the default separator <code>.</code>. In this case values will
+be <code>0.0</code>, <code>0.1</code>, <code>1.0</code>,
+<code>1.1</code>. To change separator supply it with
+<code>.group_sep</code> argument.</li>
 </ul>
-
+</div>
+<div id="column-rule-packs" class="section level2">
 <h2>Column rule packs</h2>
-
-<p>To check whether certain columns of <code>mtcars</code> obey some rules one can write the next dplyr pipeline:</p>
-
-<pre><code class="r">is_integerish &lt;- function(x) {
-  all(x == as.integer(x))
-}
-
-mtcars %&gt;%
-  summarise_if(is_integerish, funs(mean_low = mean(.) &gt; 0.5))
-#&gt; Warning: `funs()` is deprecated as of dplyr 0.8.0.
-#&gt; Please use a list of either functions or lambdas: 
-#&gt; 
-#&gt;   # Simple named list: 
-#&gt;   list(mean = mean, median = median)
-#&gt; 
-#&gt;   # Auto named with `tibble::lst()`: 
-#&gt;   tibble::lst(mean, median)
-#&gt; 
-#&gt;   # Using lambdas
-#&gt;   list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))
-#&gt; This warning is displayed once every 8 hours.
-#&gt; Call `lifecycle::last_warnings()` to see where this warning was generated.
-#&gt;   cyl_mean_low hp_mean_low vs_mean_low am_mean_low gear_mean_low carb_mean_low
-#&gt; 1         TRUE        TRUE       FALSE       FALSE          TRUE          TRUE
-</code></pre>
-
+<p>To check whether certain columns of <code>mtcars</code> obey some
+rules one can write the next dplyr pipeline:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>is_integerish <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>  <span class="fu">all</span>(x <span class="sc">==</span> <span class="fu">as.integer</span>(x))</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>}</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>  <span class="fu">summarise_if</span>(is_integerish, <span class="fu">list</span>(<span class="at">mean_low =</span> <span class="sc">~</span> <span class="fu">mean</span>(.) <span class="sc">&gt;</span> <span class="fl">0.5</span>))</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co">#&gt;   cyl_mean_low hp_mean_low vs_mean_low am_mean_low gear_mean_low carb_mean_low</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="co">#&gt; 1         TRUE        TRUE       FALSE       FALSE          TRUE          TRUE</span></span></code></pre></div>
 <p>The output has the following structure:</p>
-
 <ul>
 <li>Number of rows equals to <strong>one</strong>.</li>
-<li>Column names are constructed as <strong>&#39;validated column name&#39; + &#39;separator&#39; + &#39;rule name&#39;</strong>.</li>
-<li>Values indicate whether the <strong>column as a whole</strong> follows the rule.</li>
+<li>Column names are constructed as <strong>‘validated column name’ +
+‘separator’ + ‘rule name’</strong>.</li>
+<li>Values indicate whether the <strong>column as a whole</strong>
+follows the rule.</li>
 </ul>
-
-<p>In general it is hard to automatically separate output&#39;s column names into &#39;validated column name&#39; and &#39;rule name&#39; because default separator <code>_</code> is a commonly used one. For this reason <code>ruler</code> has function <code>rules()</code> which wraps <code>funs()</code> with the following functionality:</p>
-
+<p>In general it is hard to automatically separate output’s column names
+into ‘validated column name’ and ‘rule name’ because default separator
+<code>_</code> is a commonly used one. For this reason
+<code>ruler</code> has function <code>rules()</code> with the following
+functionality:</p>
 <ul>
-<li>Impute not supplied rule names. The format is &#39;rule__{ind}&#39; where {ind} is the index of function position within <code>rules()</code>&#39;s arguments.</li>
-<li>Add rarely used prefix <code>._.</code> (Morse code for &#39;R&#39;) to rule names. <strong>Note</strong> that one can change this prefix with <code>.prefix</code> argument.</li>
+<li>Impute not supplied rule names. The format is ’rule__{ind}’ where
+{ind} is the index of function position within <code>rules()</code>’s
+arguments.</li>
+<li>Add rarely used prefix <code>._.</code> (Morse code for ‘R’) to rule
+names. <strong>Note</strong> that one can change this prefix with
+<code>.prefix</code> argument.</li>
 </ul>
-
 <p>The next code creates a list with two elements:</p>
-
 <ul>
-<li>A column rule pack <code>my_col_pack_1</code> which checks obedience of &#39;integerish&#39; columns to rule <code>mean_low</code>.</li>
-<li>A nameless column rule pack which checks obedience of column <code>vs</code> to some (will be imputed as <code>rule__1</code>) rule. <strong>Note</strong> the use of named argument in <code>vars(vs = &quot;vs&quot;)</code>. This is the current way in <code>dplyr</code>&#39;s scoped variants of <code>summarise</code> and <code>mutate</code> to force using both column and function names in output&#39;s column name.</li>
+<li>A column rule pack <code>my_col_pack_1</code> which checks obedience
+of ‘integerish’ columns to rule <code>mean_low</code>.</li>
+<li>A nameless column rule pack which checks obedience of column
+<code>vs</code> to some (will be imputed as <code>rule__1</code>) rule.
+<strong>Note</strong> the use of named argument in
+<code>vars(vs = &quot;vs&quot;)</code>. This is the current way in
+<code>dplyr</code>’s scoped variants of <code>summarise</code> and
+<code>mutate</code> to force using both column and function names in
+output’s column name.</li>
 </ul>
-
-<pre><code class="r">my_col_packs &lt;- col_packs(
-  my_col_pack_1 = . %&gt;% summarise_if(
-    is_integerish,
-    rules(mean_low = mean(.) &gt; 0.5)
-  ),
-  . %&gt;% summarise_at(vars(vs = &quot;vs&quot;), rules(sum(.) &gt; 300))
-)
-</code></pre>
-
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>my_col_packs <span class="ot">&lt;-</span> <span class="fu">col_packs</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>  <span class="at">my_col_pack_1 =</span> . <span class="sc">%&gt;%</span> <span class="fu">summarise_if</span>(</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>    is_integerish,</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>    <span class="fu">rules</span>(<span class="at">mean_low =</span> <span class="fu">mean</span>(.) <span class="sc">&gt;</span> <span class="fl">0.5</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>  ),</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>  . <span class="sc">%&gt;%</span> <span class="fu">summarise_at</span>(<span class="fu">vars</span>(<span class="at">vs =</span> <span class="st">&quot;vs&quot;</span>), <span class="fu">rules</span>(<span class="fu">sum</span>(.) <span class="sc">&gt;</span> <span class="dv">300</span>))</span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>)</span></code></pre></div>
+</div>
+<div id="row-rule-pack" class="section level2">
 <h2>Row rule pack</h2>
-
-<p>To check whether certain rows of <code>mtcars</code> are not outliers one can write the next dplyr pipeline:</p>
-
-<pre><code class="r">z_score &lt;- function(x) {
-  (x - mean(x)) / sd(x)
-}
-
-mtcars %&gt;%
-  mutate(rowMean = rowMeans(.)) %&gt;%
-  transmute(is_common_row_mean = abs(z_score(rowMean)) &lt; 1) %&gt;%
-  slice(10:15)
-#&gt;   is_common_row_mean
-#&gt; 1               TRUE
-#&gt; 2               TRUE
-#&gt; 3               TRUE
-#&gt; 4               TRUE
-#&gt; 5               TRUE
-#&gt; 6              FALSE
-</code></pre>
-
+<p>To check whether certain rows of <code>mtcars</code> are not outliers
+one can write the next dplyr pipeline:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>z_score <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>  (x <span class="sc">-</span> <span class="fu">mean</span>(x)) <span class="sc">/</span> <span class="fu">sd</span>(x)</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>}</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rowMean =</span> <span class="fu">rowMeans</span>(.)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="at">is_common_row_mean =</span> <span class="fu">abs</span>(<span class="fu">z_score</span>(rowMean)) <span class="sc">&lt;</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">10</span><span class="sc">:</span><span class="dv">15</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="co">#&gt;                    is_common_row_mean</span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="co">#&gt; Merc 280                         TRUE</span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="co">#&gt; Merc 280C                        TRUE</span></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="co">#&gt; Merc 450SE                       TRUE</span></span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="co">#&gt; Merc 450SL                       TRUE</span></span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="co">#&gt; Merc 450SLC                      TRUE</span></span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a><span class="co">#&gt; Cadillac Fleetwood              FALSE</span></span></code></pre></div>
 <p>The output has the following structure:</p>
-
 <ul>
-<li>Number of rows equals to <strong>number of checked rows</strong>.</li>
+<li>Number of rows equals to <strong>number of checked
+rows</strong>.</li>
 <li>Column names define <strong>rule names</strong>.</li>
-<li>Values indicate whether the <strong>row as a whole</strong> follows the rule.</li>
+<li>Values indicate whether the <strong>row as a whole</strong> follows
+the rule.</li>
 </ul>
-
-<p>Pipeline like the one above is quite common: for every row compute some value based on all rows and then validate only some of them. However in the validation report column <code>id</code> should represent the row index <em>in the original data frame</em> and this information is missing after applying <code>slice()</code>.</p>
-
-<p>This problem is solved by using <a href="https://echasnovski.github.io/keyholder/">keyholder</a> package. Its main purpose is to track information about rows while modifying data frame. During exposure pack is applied to the <strong>keyed</strong> version of input data with key equals to row index. <strong>Note</strong> that to use this feature one should create rule packs using composition of functions supported by <code>keyholder</code>.</p>
-
-<p>The next code creates a list with one row pack <code>my_row_pack_1</code>. It contains one rule <code>is_common_row_mean</code> that checks 6 rows (from 10 to 15) for not being an outlier (based on information from all rows) in terms of row means.</p>
-
-<pre><code class="r">my_row_packs &lt;- row_packs(
-  my_row_pack_1 = . %&gt;% mutate(rowMean = rowMeans(.)) %&gt;%
-    transmute(is_common_row_mean = abs(z_score(rowMean)) &lt; 1) %&gt;%
-    slice(10:15)
-)
-</code></pre>
-
+<p>Pipeline like the one above is quite common: for every row compute
+some value based on all rows and then validate only some of them.
+However in the validation report column <code>id</code> should represent
+the row index <em>in the original data frame</em> and this information
+is missing after applying <code>slice()</code>.</p>
+<p>This problem is solved by using <a href="https://echasnovski.github.io/keyholder/">keyholder</a> package.
+Its main purpose is to track information about rows while modifying data
+frame. During exposure pack is applied to the <strong>keyed</strong>
+version of input data with key equals to row index.
+<strong>Note</strong> that to use this feature one should create rule
+packs using composition of functions supported by
+<code>keyholder</code>.</p>
+<p>The next code creates a list with one row pack
+<code>my_row_pack_1</code>. It contains one rule
+<code>is_common_row_mean</code> that checks 6 rows (from 10 to 15) for
+not being an outlier (based on information from all rows) in terms of
+row means.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>my_row_packs <span class="ot">&lt;-</span> <span class="fu">row_packs</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>  <span class="at">my_row_pack_1 =</span> . <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">rowMean =</span> <span class="fu">rowMeans</span>(.)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>    <span class="fu">transmute</span>(<span class="at">is_common_row_mean =</span> <span class="fu">abs</span>(<span class="fu">z_score</span>(rowMean)) <span class="sc">&lt;</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>    <span class="fu">slice</span>(<span class="dv">10</span><span class="sc">:</span><span class="dv">15</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>)</span></code></pre></div>
+</div>
+<div id="cell-rule-pack" class="section level2">
 <h2>Cell rule pack</h2>
-
-<p>To check whether certain cells of <code>mtcars</code> are not outliers one can write the next dplyr pipeline:</p>
-
-<pre><code class="r">mtcars %&gt;% transmute_if(
-  is_integerish,
-  funs(is_common = abs(z_score(.)) &lt; 1)
-) %&gt;%
-  slice(20:24)
-#&gt;   cyl_is_common hp_is_common vs_is_common am_is_common gear_is_common
-#&gt; 1         FALSE        FALSE        FALSE        FALSE           TRUE
-#&gt; 2         FALSE         TRUE        FALSE         TRUE           TRUE
-#&gt; 3         FALSE         TRUE         TRUE         TRUE           TRUE
-#&gt; 4         FALSE         TRUE         TRUE         TRUE           TRUE
-#&gt; 5         FALSE        FALSE         TRUE         TRUE           TRUE
-#&gt;   carb_is_common
-#&gt; 1          FALSE
-#&gt; 2          FALSE
-#&gt; 3           TRUE
-#&gt; 4           TRUE
-#&gt; 5           TRUE
-</code></pre>
-
+<p>To check whether certain cells of <code>mtcars</code> are not
+outliers one can write the next dplyr pipeline:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> <span class="fu">transmute_if</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>  is_integerish,</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">is_common =</span> <span class="sc">~</span> <span class="fu">abs</span>(<span class="fu">z_score</span>(.)) <span class="sc">&lt;</span> <span class="dv">1</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">20</span><span class="sc">:</span><span class="dv">24</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="co">#&gt;                  cyl_is_common hp_is_common vs_is_common am_is_common</span></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co">#&gt; Toyota Corolla           FALSE        FALSE        FALSE        FALSE</span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="co">#&gt; Toyota Corona            FALSE         TRUE        FALSE         TRUE</span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="co">#&gt; Dodge Challenger         FALSE         TRUE         TRUE         TRUE</span></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="co">#&gt; AMC Javelin              FALSE         TRUE         TRUE         TRUE</span></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="co">#&gt; Camaro Z28               FALSE        FALSE         TRUE         TRUE</span></span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="co">#&gt;                  gear_is_common carb_is_common</span></span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="co">#&gt; Toyota Corolla             TRUE          FALSE</span></span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a><span class="co">#&gt; Toyota Corona              TRUE          FALSE</span></span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a><span class="co">#&gt; Dodge Challenger           TRUE           TRUE</span></span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a><span class="co">#&gt; AMC Javelin                TRUE           TRUE</span></span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a><span class="co">#&gt; Camaro Z28                 TRUE           TRUE</span></span></code></pre></div>
 <p>The output has the following structure:</p>
-
 <ul>
-<li>Number of rows equals to <strong>number of rows for checked cells</strong>.</li>
-<li>Column names are constructed as <strong>&#39;validated column name&#39; + &#39;separator&#39; + &#39;rule name&#39;</strong>.</li>
-<li>Values indicate whether the <strong>cell</strong> follows the rule.</li>
+<li>Number of rows equals to <strong>number of rows for checked
+cells</strong>.</li>
+<li>Column names are constructed as <strong>‘validated column name’ +
+‘separator’ + ‘rule name’</strong>.</li>
+<li>Values indicate whether the <strong>cell</strong> follows the
+rule.</li>
 </ul>
-
-<p>Basically cell rule pack is a combination of column and row rule packs. It means:</p>
-
+<p>Basically cell rule pack is a combination of column and row rule
+packs. It means:</p>
 <ul>
-<li>Using <code>rules()</code> instead of <code>funs()</code> in scoped variants of <code>transmute()</code>.</li>
+<li>Using <code>rules()</code> instead of pure list in scoped variants
+of <code>transmute()</code>.</li>
 <li>Using functions supported by <code>keyholder</code>.</li>
 </ul>
+<p>The next code creates a list with one cell pack
+<code>my_cell_pack_1</code>. It checks cells of every integer-like
+column in rows 20-24 for not being an outlier within column.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>my_cell_packs <span class="ot">&lt;-</span> <span class="fu">cell_packs</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>  <span class="at">my_cell_pack_1 =</span> . <span class="sc">%&gt;%</span> <span class="fu">transmute_if</span>(</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>    is_integerish,</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>    <span class="fu">rules</span>(<span class="at">is_common =</span> <span class="fu">abs</span>(<span class="fu">z_score</span>(.)) <span class="sc">&lt;</span> <span class="dv">1</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>    <span class="fu">slice</span>(<span class="dv">20</span><span class="sc">:</span><span class="dv">24</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>)</span></code></pre></div>
+</div>
 
-<p>The next code creates a list with one cell pack <code>my_cell_pack_1</code>. It checks cells of every integer-like column in rows 20-24 for not being an outlier within column.</p>
 
-<pre><code class="r">my_cell_packs &lt;- cell_packs(
-  my_cell_pack_1 = . %&gt;% transmute_if(
-    is_integerish,
-    rules(is_common = abs(z_score(.)) &lt; 1)
-  ) %&gt;%
-    slice(20:24)
-)
-</code></pre>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 </body>
-
 </html>
